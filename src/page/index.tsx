@@ -2,12 +2,12 @@ import React from 'react';
 import { Route, Switch, RouteProps } from 'react-router-dom';
 
 import Home from './Home';
-import About from './About';
+import Movie from './Movie';
 
 const Container = () => {
   const routes: RouteProps[] = [
     { path: '/', component: Home, exact: true },
-    { path: '/about', component: About, exact: true }
+    { path: '/movie', component: Movie, exact: true }
   ];
 
   return (
