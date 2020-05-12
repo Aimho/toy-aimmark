@@ -3,10 +3,12 @@ import { Route, Switch, RouteProps } from 'react-router-dom';
 
 import Home from './Home';
 import ExampleAxios from './ExampleAxios';
+import ExampleHooks from './ExampleHooks';
 
 const Container = () => {
   const routes: RouteProps[] = [
     { path: '/', component: Home, exact: true },
+    { path: '/hooks', component: ExampleHooks, exact: true },
     { path: '/axios', component: ExampleAxios, exact: true }
   ];
 

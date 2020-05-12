@@ -13,7 +13,7 @@ function ExampleAxios() {
 
   return (
     <div>
-      <h1>Example Axios Result</h1>
+      <h1>Example Axios</h1>
       {state && JSON.stringify(state)}
     </div>
   );
