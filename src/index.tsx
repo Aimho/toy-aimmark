@@ -1,12 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { IntlProvider } from 'react-intl';
+
 import App from './App';
+import locale from './locale';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
-  <React.StrictMode>
+  <IntlProvider locale="ko" messages={locale.ko}>
     <App />
-  </React.StrictMode>,
+  </IntlProvider>,
   document.getElementById('root')
 );
 
