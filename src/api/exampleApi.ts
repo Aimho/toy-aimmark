@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import AppConfig from '../config';
 
-export async function getMovie() {
+export async function getApi() {
   const result = await axios.get(
     `${AppConfig().exampleUrl}/aaapi.cgi?t=loadvideo&q=60029591`,
     {
@@ -14,5 +14,5 @@ export async function getMovie() {
   );
 
   if (result.status === 200) return result.data;
-  return [];
+  return null;
 }

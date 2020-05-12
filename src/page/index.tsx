@@ -2,12 +2,12 @@ import React from 'react';
 import { Route, Switch, RouteProps } from 'react-router-dom';
 
 import Home from './Home';
-import Movie from './Movie';
+import ExampleAxios from './ExampleAxios';
 
 const Container = () => {
   const routes: RouteProps[] = [
     { path: '/', component: Home, exact: true },
-    { path: '/movie', component: Movie, exact: true }
+    { path: '/axios', component: ExampleAxios, exact: true }
   ];
 
   return (
