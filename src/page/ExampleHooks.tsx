@@ -1,6 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
-import { useInput } from '../hooks/useInputs';
+import React from "react";
+import styled from "styled-components";
+import { useInput } from "../hooks/useInputs";
 
 const StyledHooks = styled.div`
   input {

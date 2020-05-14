@@ -1,7 +1,7 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
-import useExample from '../modules/example/useExample';
+import useExample from "../modules/example/useExample";
 
 const StyledRedux = styled.div`
   input {
