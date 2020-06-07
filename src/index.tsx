@@ -1,13 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { IntlProvider } from 'react-intl';
-import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
+import "core-js/es/map";
+import "core-js/es/set";
 
-import App from './App';
-import locale from './locale';
-import configureStore from './store';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import { IntlProvider } from "react-intl";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import { Normalize } from "styled-normalize";
+
+import App from "./App";
+import locale from "./locale";
+import configureStore from "./store";
+import * as serviceWorker from "./serviceWorker";
 
 const { store, persistor } = configureStore();
 
@@ -15,11 +19,12 @@ ReactDOM.render(
   <IntlProvider locale="ko" messages={locale.ko}>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
+        <Normalize />
         <App />
       </PersistGate>
     </Provider>
   </IntlProvider>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change
