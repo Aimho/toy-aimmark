@@ -1,12 +1,11 @@
-import "core-js/es/map";
-import "core-js/es/set";
+import "react-app-polyfill/ie11";
+import "react-app-polyfill/stable";
 
 import React from "react";
 import ReactDOM from "react-dom";
 import { IntlProvider } from "react-intl";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
-import { Normalize } from "styled-normalize";
 
 import App from "./App";
 import locale from "./locale";
@@ -19,7 +18,6 @@ ReactDOM.render(
   <IntlProvider locale="ko" messages={locale.ko}>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <Normalize />
         <App />
       </PersistGate>
     </Provider>
