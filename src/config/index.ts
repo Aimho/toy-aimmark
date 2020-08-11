@@ -5,8 +5,8 @@ const AppConfig = () => {
   return {
     env,
     baseUrl,
-    exampleUrl
+    exampleUrl,
   };
 };
 
-export default AppConfig;
+export default AppConfig();
