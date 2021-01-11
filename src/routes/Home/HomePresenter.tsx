@@ -26,7 +26,8 @@ function Home() {
 
   useEffect(() => {
     getToken();
-  }, [getToken]);
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <HomeContainer>
