@@ -5,9 +5,13 @@ import { SnackbarProvider } from "notistack";
 import theme from "../../styles/theme";
 import GlobalStyle from "../../styles/GlobalStyles";
 import snackbarStyles from "../../styles/snackbarStyles";
+import * as firebaseUtils from "../../utils/firebaseUtils";
 import AppPresenter from "./AppPresenter";
 
 const AppContainer: React.FC = () => {
+  firebaseUtils.initial();
+  firebaseUtils.getMessage();
+
   return (
     <MuiThemeProvider theme={theme}>
       <ThemeProvider theme={theme}>
