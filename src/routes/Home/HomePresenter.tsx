@@ -1,38 +1,25 @@
-import React, { useEffect } from "react";
-import { useSnackbar } from "notistack";
-import styled from "styled-components";
-import * as firebaseUtils from "../../utils/firebaseUtils";
+import React from "react";
+import { Card, Container, Typography } from "@material-ui/core";
 
-const HomeContainer = styled.div`
-  width: 100vw;
-  height: 100vh;
-  background-color: #000;
-  color: #fff;
-  font-size: 60px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+import LoginButtons from "../../component/LoginButtons";
+import { StyledHome, StyledLogin, StyledBanner } from "./styled";
 
 function Home() {
-  const { enqueueSnackbar } = useSnackbar();
-
-  const getToken = async () => {
-    const messagingToken = await firebaseUtils.getMessagingToken();
-    if (messagingToken) {
-      enqueueSnackbar(`token: ${messagingToken}`, { variant: "info" });
-    }
-  };
-
-  useEffect(() => {
-    getToken();
-    // eslint-disable-next-line
-  }, []);
-
   return (
-    <HomeContainer>
-      <h1>홈</h1>
-    </HomeContainer>
+    <StyledHome>
+      <Container maxWidth="xs">
+        <Card variant="outlined">
+          <StyledBanner>
+            <Typography variant="h4" align="center">
+              Toy Bookmark
+            </Typography>
+          </StyledBanner>
+          <StyledLogin>
+            <LoginButtons />
+          </StyledLogin>
+        </Card>
+      </Container>
+    </StyledHome>
   );
 }
 
