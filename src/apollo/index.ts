@@ -3,10 +3,12 @@ import { HttpLink, ApolloLink } from "@apollo/client";
 import { onError } from "apollo-link-error";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import config from "../config";
-import { localStorage, STORAGE_ACTION } from "../utils/storage";
 
 const httpLink = new HttpLink({
-  uri: `https://${config.graphqlUrl}`,
+  uri: `https://${config.hasura.url}`,
+  headers: {
+    "x-hasura-admin-secret": config.hasura.secret,
+  },
 });
 
 const cache = new InMemoryCache();
@@ -14,10 +16,6 @@ const cache = new InMemoryCache();
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors && graphQLErrors.length > 0) {
     graphQLErrors.map(({ message, locations, path }) => {
-      if (message.includes("JWT")) {
-        window.location.reload();
-        localStorage.removeItem(STORAGE_ACTION.AUTH_TOKEN);
-      }
       // eslint-disable-next-line no-console
       return console.log(
         `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`

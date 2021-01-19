@@ -1,23 +1,25 @@
 import React from "react";
-import { Card, Container, Typography } from "@material-ui/core";
+import { Container, Grid } from "@material-ui/core";
 
-import LoginButtons from "../../component/LoginButtons";
-import { StyledHome, StyledLogin, StyledBanner } from "./styled";
+import Bookmark from "../../component/Bookmark";
+import SearchBar from "../../component/SearchBar";
+import { StyledHome, StyledHomeHeader, StyledHomeContents } from "./styled";
 
 function Home() {
   return (
     <StyledHome>
-      <Container maxWidth="xs">
-        <Card variant="outlined">
-          <StyledBanner>
-            <Typography variant="h4" align="center">
-              Toy Bookmark
-            </Typography>
-          </StyledBanner>
-          <StyledLogin>
-            <LoginButtons />
-          </StyledLogin>
-        </Card>
+      <Container maxWidth="lg">
+        <StyledHomeHeader>
+          <Grid container justify="center" alignItems="center">
+            <Grid item sm={6} xs={12}>
+              <SearchBar />
+            </Grid>
+          </Grid>
+        </StyledHomeHeader>
+
+        <StyledHomeContents>
+          <Bookmark />
+        </StyledHomeContents>
       </Container>
     </StyledHome>
   );

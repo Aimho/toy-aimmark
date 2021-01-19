@@ -1,2 +1,2 @@
-import LoadingPresenter from './LoadingPresenter';
-export default LoadingPresenter;
+import Loading from "./LoadingPresenter";
+export default Loading;

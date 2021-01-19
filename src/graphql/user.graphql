@@ -1,0 +1,27 @@
+mutation insertUser($id: String!, $uid: String!, $email: String!) {
+  insert_user_one(object: { id: $id, uid: $uid, email: $email }) {
+    id
+    uid
+    email
+  }
+}
+
+query getUser($uid: String!) {
+  user_by_pk(uid: $uid) {
+    id
+    uid
+    email
+    search_engine
+  }
+}
+
+mutation updateUser($id: String!, $search_engine: String!) {
+  update_user(
+    where: { id: { _eq: $id } }
+    _set: { search_engine: $search_engine }
+  ) {
+    returning {
+      search_engine
+    }
+  }
+}

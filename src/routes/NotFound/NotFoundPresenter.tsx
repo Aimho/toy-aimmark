@@ -10,7 +10,7 @@ const NotFoundPresenter: React.FC = () => (
     <p className="description">요청하신 페이지가 존재하지 않습니다.</p>
     <img src={imgError} alt="error" />
     <Link to="/">
-      <Button color="primary" variant="contained" size="large">
+      <Button color="inherit" variant="text" size="large">
         홈으로 돌아가기
       </Button>
     </Link>

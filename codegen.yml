@@ -11,4 +11,7 @@ generates:
       - "typescript-operations"
       - "typescript-react-apollo"
     config:
+      whithHOC: false
+      withComponents: false
       withHooks: true
+      preResolveTypes: true
