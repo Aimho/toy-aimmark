@@ -35,32 +35,9 @@ export type String_Comparison_Exp = {
 export type Item = {
   __typename?: 'item';
   id: Scalars['uuid'];
-  /** An array relationship */
-  tags: Array<Tag>;
-  /** An aggregated array relationship */
-  tags_aggregate: Tag_Aggregate;
+  name: Scalars['String'];
   url: Scalars['String'];
   user_id?: Maybe<Scalars['String']>;
-};
-
-
-/** columns and relationships of "item" */
-export type ItemTagsArgs = {
-  distinct_on?: Maybe<Array<Tag_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Tag_Order_By>>;
-  where?: Maybe<Tag_Bool_Exp>;
-};
-
-
-/** columns and relationships of "item" */
-export type ItemTags_AggregateArgs = {
-  distinct_on?: Maybe<Array<Tag_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Tag_Order_By>>;
-  where?: Maybe<Tag_Bool_Exp>;
 };
 
 /** aggregated selection of "item" */
@@ -104,7 +81,7 @@ export type Item_Bool_Exp = {
   _not?: Maybe<Item_Bool_Exp>;
   _or?: Maybe<Array<Maybe<Item_Bool_Exp>>>;
   id?: Maybe<Uuid_Comparison_Exp>;
-  tags?: Maybe<Tag_Bool_Exp>;
+  name?: Maybe<String_Comparison_Exp>;
   url?: Maybe<String_Comparison_Exp>;
   user_id?: Maybe<String_Comparison_Exp>;
 };
@@ -118,7 +95,7 @@ export enum Item_Constraint {
 /** input type for inserting data into table "item" */
 export type Item_Insert_Input = {
   id?: Maybe<Scalars['uuid']>;
-  tags?: Maybe<Tag_Arr_Rel_Insert_Input>;
+  name?: Maybe<Scalars['String']>;
   url?: Maybe<Scalars['String']>;
   user_id?: Maybe<Scalars['String']>;
 };
@@ -127,6 +104,7 @@ export type Item_Insert_Input = {
 export type Item_Max_Fields = {
   __typename?: 'item_max_fields';
   id?: Maybe<Scalars['uuid']>;
+  name?: Maybe<Scalars['String']>;
   url?: Maybe<Scalars['String']>;
   user_id?: Maybe<Scalars['String']>;
 };
@@ -134,6 +112,7 @@ export type Item_Max_Fields = {
 /** order by max() on columns of table "item" */
 export type Item_Max_Order_By = {
   id?: Maybe<Order_By>;
+  name?: Maybe<Order_By>;
   url?: Maybe<Order_By>;
   user_id?: Maybe<Order_By>;
 };
@@ -142,6 +121,7 @@ export type Item_Max_Order_By = {
 export type Item_Min_Fields = {
   __typename?: 'item_min_fields';
   id?: Maybe<Scalars['uuid']>;
+  name?: Maybe<Scalars['String']>;
   url?: Maybe<Scalars['String']>;
   user_id?: Maybe<Scalars['String']>;
 };
@@ -149,6 +129,7 @@ export type Item_Min_Fields = {
 /** order by min() on columns of table "item" */
 export type Item_Min_Order_By = {
   id?: Maybe<Order_By>;
+  name?: Maybe<Order_By>;
   url?: Maybe<Order_By>;
   user_id?: Maybe<Order_By>;
 };
@@ -178,7 +159,7 @@ export type Item_On_Conflict = {
 /** ordering options when selecting data from "item" */
 export type Item_Order_By = {
   id?: Maybe<Order_By>;
-  tags_aggregate?: Maybe<Tag_Aggregate_Order_By>;
+  name?: Maybe<Order_By>;
   url?: Maybe<Order_By>;
   user_id?: Maybe<Order_By>;
 };
@@ -193,6 +174,8 @@ export enum Item_Select_Column {
   /** column name */
   Id = 'id',
   /** column name */
+  Name = 'name',
+  /** column name */
   Url = 'url',
   /** column name */
   UserId = 'user_id'
@@ -201,6 +184,7 @@ export enum Item_Select_Column {
 /** input type for updating data in table "item" */
 export type Item_Set_Input = {
   id?: Maybe<Scalars['uuid']>;
+  name?: Maybe<Scalars['String']>;
   url?: Maybe<Scalars['String']>;
   user_id?: Maybe<Scalars['String']>;
 };
@@ -209,6 +193,8 @@ export type Item_Set_Input = {
 export enum Item_Update_Column {
   /** column name */
   Id = 'id',
+  /** column name */
+  Name = 'name',
   /** column name */
   Url = 'url',
   /** column name */
@@ -222,10 +208,6 @@ export type Mutation_Root = {
   delete_item?: Maybe<Item_Mutation_Response>;
   /** delete single row from the table: "item" */
   delete_item_by_pk?: Maybe<Item>;
-  /** delete data from the table: "tag" */
-  delete_tag?: Maybe<Tag_Mutation_Response>;
-  /** delete single row from the table: "tag" */
-  delete_tag_by_pk?: Maybe<Tag>;
   /** delete data from the table: "user" */
   delete_user?: Maybe<User_Mutation_Response>;
   /** delete single row from the table: "user" */
@@ -234,10 +216,6 @@ export type Mutation_Root = {
   insert_item?: Maybe<Item_Mutation_Response>;
   /** insert a single row into the table: "item" */
   insert_item_one?: Maybe<Item>;
-  /** insert data into the table: "tag" */
-  insert_tag?: Maybe<Tag_Mutation_Response>;
-  /** insert a single row into the table: "tag" */
-  insert_tag_one?: Maybe<Tag>;
   /** insert data into the table: "user" */
   insert_user?: Maybe<User_Mutation_Response>;
   /** insert a single row into the table: "user" */
@@ -246,10 +224,6 @@ export type Mutation_Root = {
   update_item?: Maybe<Item_Mutation_Response>;
   /** update single row of the table: "item" */
   update_item_by_pk?: Maybe<Item>;
-  /** update data of the table: "tag" */
-  update_tag?: Maybe<Tag_Mutation_Response>;
-  /** update single row of the table: "tag" */
-  update_tag_by_pk?: Maybe<Tag>;
   /** update data of the table: "user" */
   update_user?: Maybe<User_Mutation_Response>;
   /** update single row of the table: "user" */
@@ -265,18 +239,6 @@ export type Mutation_RootDelete_ItemArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_Item_By_PkArgs = {
-  id: Scalars['uuid'];
-};
-
-
-/** mutation root */
-export type Mutation_RootDelete_TagArgs = {
-  where: Tag_Bool_Exp;
-};
-
-
-/** mutation root */
-export type Mutation_RootDelete_Tag_By_PkArgs = {
   id: Scalars['uuid'];
 };
 
@@ -308,20 +270,6 @@ export type Mutation_RootInsert_Item_OneArgs = {
 
 
 /** mutation root */
-export type Mutation_RootInsert_TagArgs = {
-  objects: Array<Tag_Insert_Input>;
-  on_conflict?: Maybe<Tag_On_Conflict>;
-};
-
-
-/** mutation root */
-export type Mutation_RootInsert_Tag_OneArgs = {
-  object: Tag_Insert_Input;
-  on_conflict?: Maybe<Tag_On_Conflict>;
-};
-
-
-/** mutation root */
 export type Mutation_RootInsert_UserArgs = {
   objects: Array<User_Insert_Input>;
   on_conflict?: Maybe<User_On_Conflict>;
@@ -346,20 +294,6 @@ export type Mutation_RootUpdate_ItemArgs = {
 export type Mutation_RootUpdate_Item_By_PkArgs = {
   _set?: Maybe<Item_Set_Input>;
   pk_columns: Item_Pk_Columns_Input;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdate_TagArgs = {
-  _set?: Maybe<Tag_Set_Input>;
-  where: Tag_Bool_Exp;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdate_Tag_By_PkArgs = {
-  _set?: Maybe<Tag_Set_Input>;
-  pk_columns: Tag_Pk_Columns_Input;
 };
 
 
@@ -401,12 +335,6 @@ export type Query_Root = {
   item_aggregate: Item_Aggregate;
   /** fetch data from the table: "item" using primary key columns */
   item_by_pk?: Maybe<Item>;
-  /** fetch data from the table: "tag" */
-  tag: Array<Tag>;
-  /** fetch aggregated fields from the table: "tag" */
-  tag_aggregate: Tag_Aggregate;
-  /** fetch data from the table: "tag" using primary key columns */
-  tag_by_pk?: Maybe<Tag>;
   /** fetch data from the table: "user" */
   user: Array<User>;
   /** fetch aggregated fields from the table: "user" */
@@ -438,32 +366,6 @@ export type Query_RootItem_AggregateArgs = {
 
 /** query root */
 export type Query_RootItem_By_PkArgs = {
-  id: Scalars['uuid'];
-};
-
-
-/** query root */
-export type Query_RootTagArgs = {
-  distinct_on?: Maybe<Array<Tag_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Tag_Order_By>>;
-  where?: Maybe<Tag_Bool_Exp>;
-};
-
-
-/** query root */
-export type Query_RootTag_AggregateArgs = {
-  distinct_on?: Maybe<Array<Tag_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Tag_Order_By>>;
-  where?: Maybe<Tag_Bool_Exp>;
-};
-
-
-/** query root */
-export type Query_RootTag_By_PkArgs = {
   id: Scalars['uuid'];
 };
 
@@ -502,12 +404,6 @@ export type Subscription_Root = {
   item_aggregate: Item_Aggregate;
   /** fetch data from the table: "item" using primary key columns */
   item_by_pk?: Maybe<Item>;
-  /** fetch data from the table: "tag" */
-  tag: Array<Tag>;
-  /** fetch aggregated fields from the table: "tag" */
-  tag_aggregate: Tag_Aggregate;
-  /** fetch data from the table: "tag" using primary key columns */
-  tag_by_pk?: Maybe<Tag>;
   /** fetch data from the table: "user" */
   user: Array<User>;
   /** fetch aggregated fields from the table: "user" */
@@ -544,32 +440,6 @@ export type Subscription_RootItem_By_PkArgs = {
 
 
 /** subscription root */
-export type Subscription_RootTagArgs = {
-  distinct_on?: Maybe<Array<Tag_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Tag_Order_By>>;
-  where?: Maybe<Tag_Bool_Exp>;
-};
-
-
-/** subscription root */
-export type Subscription_RootTag_AggregateArgs = {
-  distinct_on?: Maybe<Array<Tag_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Tag_Order_By>>;
-  where?: Maybe<Tag_Bool_Exp>;
-};
-
-
-/** subscription root */
-export type Subscription_RootTag_By_PkArgs = {
-  id: Scalars['uuid'];
-};
-
-
-/** subscription root */
 export type Subscription_RootUserArgs = {
   distinct_on?: Maybe<Array<User_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -593,163 +463,6 @@ export type Subscription_RootUser_AggregateArgs = {
 export type Subscription_RootUser_By_PkArgs = {
   uid: Scalars['String'];
 };
-
-/** columns and relationships of "tag" */
-export type Tag = {
-  __typename?: 'tag';
-  id: Scalars['uuid'];
-  item_id: Scalars['uuid'];
-  name: Scalars['String'];
-};
-
-/** aggregated selection of "tag" */
-export type Tag_Aggregate = {
-  __typename?: 'tag_aggregate';
-  aggregate?: Maybe<Tag_Aggregate_Fields>;
-  nodes: Array<Tag>;
-};
-
-/** aggregate fields of "tag" */
-export type Tag_Aggregate_Fields = {
-  __typename?: 'tag_aggregate_fields';
-  count?: Maybe<Scalars['Int']>;
-  max?: Maybe<Tag_Max_Fields>;
-  min?: Maybe<Tag_Min_Fields>;
-};
-
-
-/** aggregate fields of "tag" */
-export type Tag_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Tag_Select_Column>>;
-  distinct?: Maybe<Scalars['Boolean']>;
-};
-
-/** order by aggregate values of table "tag" */
-export type Tag_Aggregate_Order_By = {
-  count?: Maybe<Order_By>;
-  max?: Maybe<Tag_Max_Order_By>;
-  min?: Maybe<Tag_Min_Order_By>;
-};
-
-/** input type for inserting array relation for remote table "tag" */
-export type Tag_Arr_Rel_Insert_Input = {
-  data: Array<Tag_Insert_Input>;
-  on_conflict?: Maybe<Tag_On_Conflict>;
-};
-
-/** Boolean expression to filter rows from the table "tag". All fields are combined with a logical 'AND'. */
-export type Tag_Bool_Exp = {
-  _and?: Maybe<Array<Maybe<Tag_Bool_Exp>>>;
-  _not?: Maybe<Tag_Bool_Exp>;
-  _or?: Maybe<Array<Maybe<Tag_Bool_Exp>>>;
-  id?: Maybe<Uuid_Comparison_Exp>;
-  item_id?: Maybe<Uuid_Comparison_Exp>;
-  name?: Maybe<String_Comparison_Exp>;
-};
-
-/** unique or primary key constraints on table "tag" */
-export enum Tag_Constraint {
-  /** unique or primary key constraint */
-  TagPkey = 'tag_pkey'
-}
-
-/** input type for inserting data into table "tag" */
-export type Tag_Insert_Input = {
-  id?: Maybe<Scalars['uuid']>;
-  item_id?: Maybe<Scalars['uuid']>;
-  name?: Maybe<Scalars['String']>;
-};
-
-/** aggregate max on columns */
-export type Tag_Max_Fields = {
-  __typename?: 'tag_max_fields';
-  id?: Maybe<Scalars['uuid']>;
-  item_id?: Maybe<Scalars['uuid']>;
-  name?: Maybe<Scalars['String']>;
-};
-
-/** order by max() on columns of table "tag" */
-export type Tag_Max_Order_By = {
-  id?: Maybe<Order_By>;
-  item_id?: Maybe<Order_By>;
-  name?: Maybe<Order_By>;
-};
-
-/** aggregate min on columns */
-export type Tag_Min_Fields = {
-  __typename?: 'tag_min_fields';
-  id?: Maybe<Scalars['uuid']>;
-  item_id?: Maybe<Scalars['uuid']>;
-  name?: Maybe<Scalars['String']>;
-};
-
-/** order by min() on columns of table "tag" */
-export type Tag_Min_Order_By = {
-  id?: Maybe<Order_By>;
-  item_id?: Maybe<Order_By>;
-  name?: Maybe<Order_By>;
-};
-
-/** response of any mutation on the table "tag" */
-export type Tag_Mutation_Response = {
-  __typename?: 'tag_mutation_response';
-  /** number of affected rows by the mutation */
-  affected_rows: Scalars['Int'];
-  /** data of the affected rows by the mutation */
-  returning: Array<Tag>;
-};
-
-/** input type for inserting object relation for remote table "tag" */
-export type Tag_Obj_Rel_Insert_Input = {
-  data: Tag_Insert_Input;
-  on_conflict?: Maybe<Tag_On_Conflict>;
-};
-
-/** on conflict condition type for table "tag" */
-export type Tag_On_Conflict = {
-  constraint: Tag_Constraint;
-  update_columns: Array<Tag_Update_Column>;
-  where?: Maybe<Tag_Bool_Exp>;
-};
-
-/** ordering options when selecting data from "tag" */
-export type Tag_Order_By = {
-  id?: Maybe<Order_By>;
-  item_id?: Maybe<Order_By>;
-  name?: Maybe<Order_By>;
-};
-
-/** primary key columns input for table: "tag" */
-export type Tag_Pk_Columns_Input = {
-  id: Scalars['uuid'];
-};
-
-/** select columns of table "tag" */
-export enum Tag_Select_Column {
-  /** column name */
-  Id = 'id',
-  /** column name */
-  ItemId = 'item_id',
-  /** column name */
-  Name = 'name'
-}
-
-/** input type for updating data in table "tag" */
-export type Tag_Set_Input = {
-  id?: Maybe<Scalars['uuid']>;
-  item_id?: Maybe<Scalars['uuid']>;
-  name?: Maybe<Scalars['String']>;
-};
-
-/** update columns of table "tag" */
-export enum Tag_Update_Column {
-  /** column name */
-  Id = 'id',
-  /** column name */
-  ItemId = 'item_id',
-  /** column name */
-  Name = 'name'
-}
 
 /** columns and relationships of "user" */
 export type User = {
@@ -973,11 +686,12 @@ export type GetUserItemQueryVariables = Exact<{
 }>;
 
 
-export type GetUserItemQuery = { __typename?: 'query_root', item: Array<{ __typename?: 'item', url: string, id: any, tags: Array<{ __typename?: 'tag', name: string, id: any }> }> };
+export type GetUserItemQuery = { __typename?: 'query_root', item: Array<{ __typename?: 'item', id: any, url: string, name: string }> };
 
 export type InsertItemMutationVariables = Exact<{
   user_id: Scalars['String'];
   url: Scalars['String'];
+  name: Scalars['String'];
 }>;
 
 
@@ -1011,12 +725,9 @@ export type UpdateUserMutation = { __typename?: 'mutation_root', update_user?: M
 export const GetUserItemDocument = gql`
     query getUserItem($user_id: String!) {
   item(where: {user_id: {_eq: $user_id}}) {
-    url
     id
-    tags {
-      name
-      id
-    }
+    url
+    name
   }
 }
     `;
@@ -1047,8 +758,8 @@ export type GetUserItemQueryHookResult = ReturnType<typeof useGetUserItemQuery>;
 export type GetUserItemLazyQueryHookResult = ReturnType<typeof useGetUserItemLazyQuery>;
 export type GetUserItemQueryResult = Apollo.QueryResult<GetUserItemQuery, GetUserItemQueryVariables>;
 export const InsertItemDocument = gql`
-    mutation insertItem($user_id: String!, $url: String!) {
-  insert_item_one(object: {user_id: $user_id, url: $url}) {
+    mutation insertItem($user_id: String!, $url: String!, $name: String!) {
+  insert_item_one(object: {user_id: $user_id, url: $url, name: $name}) {
     id
   }
 }
@@ -1070,6 +781,7 @@ export type InsertItemMutationFn = Apollo.MutationFunction<InsertItemMutation, I
  *   variables: {
  *      user_id: // value for 'user_id'
  *      url: // value for 'url'
+ *      name: // value for 'name'
  *   },
  * });
  */

@@ -1,11 +1,10 @@
 import React from "react";
-import { Container, Grid } from "@material-ui/core";
+import { Container, Grid, Typography } from "@material-ui/core";
 
-import Bookmark from "../../component/Bookmark";
 import SearchBar from "../../component/SearchBar";
-import { StyledHome, StyledHomeHeader, StyledHomeContents } from "./styled";
+import { StyledHome, StyledHomeHeader } from "./styled";
 
-function Home() {
+function HomePresenter() {
   return (
     <StyledHome>
       <Container maxWidth="lg">
@@ -17,12 +16,12 @@ function Home() {
           </Grid>
         </StyledHomeHeader>
 
-        <StyledHomeContents>
-          <Bookmark />
-        </StyledHomeContents>
+        <Typography variant="h4" align="center">
+          자신만의 북마크를 만들고 공유해보세요!
+        </Typography>
       </Container>
     </StyledHome>
   );
 }
 
-export default Home;
+export default HomePresenter;

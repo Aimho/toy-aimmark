@@ -1,5 +1,6 @@
 import "firebase/auth";
 import React from "react";
+import { useHistory } from "react-router-dom";
 import firebase from "firebase/app";
 
 import { useSetRecoilState } from "recoil";
@@ -15,6 +16,7 @@ import LogoutButtonPresenter from "./LogoutButtonPresenter";
 import { TSearchEngine } from "../SearchBar/type";
 
 const LoginButtonsContainer = () => {
+  const history = useHistory();
   const [insertUser] = useInsertUserMutation();
   const [getUser, { data, loading }] = useGetUserLazyQuery();
   const setUser = {
@@ -37,8 +39,9 @@ const LoginButtonsContainer = () => {
       setUser.id(id);
       setUser.email(email);
       setUser.searchEngine(search_engine);
+      history.push(`/${id}`);
     }
-  }, [id, setUser, userByPk]);
+  }, [id, setUser, userByPk, history]);
 
   React.useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
@@ -94,7 +97,7 @@ const LoginButtonsContainer = () => {
     <React.Fragment>
       <Loading open={loading} />
       {id ? (
-        <LogoutButtonPresenter onSignOut={onSignOut} />
+        <LogoutButtonPresenter id={id} onSignOut={onSignOut} />
       ) : (
         <LoginButtonsPresenter onSignInGoogle={onSignInGoogle} />
       )}

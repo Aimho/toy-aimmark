@@ -1,8 +1,14 @@
 import React from "react";
+import { useRecoilValue } from "recoil";
 import { Grid } from "@material-ui/core";
 import BookmarkDialog from "./BookmarkDialog";
+import { userState } from "../../recoils/userState";
 
 const BookmarkButtons = () => {
+  const { id } = useRecoilValue(userState);
+
+  if (!id) return null;
+
   return (
     <Grid container justify="flex-end" alignItems="center" spacing={1}>
       {/* todo align item */}

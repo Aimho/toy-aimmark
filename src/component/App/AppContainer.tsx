@@ -9,7 +9,6 @@ import GlobalStyle from "../../styles/GlobalStyles";
 import snackbarStyles from "../../styles/snackbarStyles";
 
 import AppPresenter from "./AppPresenter";
-import AppBar from "../AppBar";
 
 const AppContainer: React.FC = () => {
   return (
@@ -23,7 +22,6 @@ const AppContainer: React.FC = () => {
           <GlobalStyle />
 
           <RecoilRoot>
-            <AppBar />
             <AppPresenter />
           </RecoilRoot>
         </SnackbarProvider>

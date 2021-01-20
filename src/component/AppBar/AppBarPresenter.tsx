@@ -1,18 +1,21 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import LoginButtons from "../LoginButtons";
 import { useAppBarStyles } from "./style";
 
-export default function SearchAppBar() {
+function AppBarPresenter() {
   const classes = useAppBarStyles();
 
   return (
     <header className={classes.root}>
       <AppBar position="static" color="transparent" component="section">
         <Toolbar>
-          <Typography className={classes.title} variant="h6" noWrap>
-            AimMark
-          </Typography>
+          <Link to="/" style={{ marginRight: "auto" }}>
+            <Typography noWrap variant="h6" className={classes.title}>
+              AimMark
+            </Typography>
+          </Link>
           {/* todo: tag search updates */}
           {/* <div className={classes.search}>
             <div className={classes.searchIcon}>
@@ -34,3 +37,5 @@ export default function SearchAppBar() {
     </header>
   );
 }
+
+export default AppBarPresenter;

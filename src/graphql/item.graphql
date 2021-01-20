@@ -2,11 +2,12 @@ query getUserItem($user_id: String!) {
   item(where: { user_id: { _eq: $user_id } }) {
     id
     url
+    name
   }
 }
 
-mutation insertItem($user_id: String!, $url: String!) {
-  insert_item_one(object: { user_id: $user_id, url: $url }) {
+mutation insertItem($user_id: String!, $url: String!, $name: String!) {
+  insert_item_one(object: { user_id: $user_id, url: $url, name: $name }) {
     id
   }
 }

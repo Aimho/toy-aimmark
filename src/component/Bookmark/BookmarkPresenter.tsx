@@ -1,10 +1,10 @@
-import { Grid } from "@material-ui/core";
+import { Grid, Typography } from "@material-ui/core";
 import React from "react";
 import BookmarkButtons from "./BookmarkButtons";
 import { MuiIconButton } from "./styled";
 
 interface Props {
-  items?: Array<{ url: string; id: any }>;
+  items?: Array<{ url: string; name: string; id: any }>;
 }
 
 const BookmarkPresenter = (props: Props) => {
@@ -31,6 +31,9 @@ const BookmarkPresenter = (props: Props) => {
                 alt={baseUrl}
               />
             </MuiIconButton>
+            <Typography variant="caption" align="center" component="p">
+              {item.name}
+            </Typography>
           </Grid>
         );
       })}
