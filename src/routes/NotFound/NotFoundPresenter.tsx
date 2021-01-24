@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
-import { Main } from "./styled";
+import { Main } from "./style";
 import imgError from "./error.png";
 
 const NotFoundPresenter: React.FC = () => (

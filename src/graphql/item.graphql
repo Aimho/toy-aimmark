@@ -11,3 +11,12 @@ mutation insertItem($user_id: String!, $url: String!, $name: String!) {
     id
   }
 }
+
+mutation deleteItem($id: uuid!) {
+  delete_item_by_pk(id: $id) {
+    id
+    name
+    url
+    user_id
+  }
+}

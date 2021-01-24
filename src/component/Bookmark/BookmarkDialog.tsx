@@ -16,7 +16,11 @@ import { useRecoilValue } from "recoil";
 import { userState } from "../../recoils/userState";
 import { useInsertItemMutation } from "../../generated/graphql";
 
-const BookmarkDialog = () => {
+interface Props {
+  onCloseCallBack: () => void;
+}
+
+const BookmarkDialog = ({ onCloseCallBack }: Props) => {
   const { id } = useRecoilValue(userState);
   const [insertItem] = useInsertItemMutation();
 
@@ -35,13 +39,15 @@ const BookmarkDialog = () => {
     }
     insertItem({
       variables: { user_id: id, url, name },
+    }).then(() => {
+      onCloseDialog();
+      onCloseCallBack();
     });
-    onCloseDialog();
   };
 
   return (
     <React.Fragment>
-      <IconButton onClick={onOpenDialog}>
+      <IconButton onClick={onOpenDialog} color="primary">
         <Bookmark />
       </IconButton>
 
@@ -85,8 +91,12 @@ const BookmarkDialog = () => {
             </Grid>
           </DialogContent>
           <DialogActions>
-            <Button onClick={onCloseDialog}>취소</Button>
-            <Button type="submit">추가</Button>
+            <Button variant="text" color="secondary" onClick={onCloseDialog}>
+              취소
+            </Button>
+            <Button variant="text" color="primary" type="submit">
+              추가
+            </Button>
           </DialogActions>
         </form>
       </Dialog>

@@ -9,11 +9,11 @@ const snackbarStyles = makeStyles(() => ({
     backgroundColor: `${colorSet.gray000} !important`,
   },
   variantSuccess: {
-    color: `${colorSet.primaryBase} !important`,
+    color: `${colorSet.gray900} !important`,
     backgroundColor: `${colorSet.primaryLight} !important`,
   },
   variantError: {
-    color: `${colorSet.errorBase} !important`,
+    color: `${colorSet.gray900} !important`,
     backgroundColor: `${colorSet.errorLight} !important`,
   },
 }));

@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Grid, Typography } from "@material-ui/core";
 
 import SearchBar from "../../component/SearchBar";
-import { StyledHome, StyledHomeHeader } from "./styled";
+import { StyledHome, StyledHomeHeader } from "./style";
 
 function HomePresenter() {
   return (

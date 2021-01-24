@@ -1,9 +1,12 @@
-import { Grid, Typography } from "@material-ui/core";
 import React from "react";
-import BookmarkButtons from "./BookmarkButtons";
-import { MuiIconButton } from "./styled";
+import { Delete } from "@material-ui/icons";
+import { Chip, Grid, Typography } from "@material-ui/core";
+import colorSet from "../../styles/colorSet";
+import { MuiAvatar } from "./style";
 
 interface Props {
+  isOwner: boolean;
+  onDelete: (name: string, id: string) => void;
   items?: Array<{ url: string; name: string; id: any }>;
 }
 
@@ -13,31 +16,45 @@ const BookmarkPresenter = (props: Props) => {
   };
 
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={12}>
-        <BookmarkButtons />
-      </Grid>
-
+    <React.Fragment>
       {props.items?.map((item, index) => {
         const baseUrl = new URL(item.url).origin;
 
+        const icon = (
+          <MuiAvatar src={`${baseUrl}/favicon.ico`}>
+            <Typography variant="subtitle2" style={{ fontWeight: "bold" }}>
+              {item.name[0]}
+            </Typography>
+          </MuiAvatar>
+        );
+
+        const label = <Typography variant="body2">{item.name}</Typography>;
+
         return (
           <Grid item key={index}>
-            <MuiIconButton onClick={() => onOpenUrl(item.url)}>
-              <img
-                width="32"
-                height="32"
-                src={`${baseUrl}/favicon.ico`}
-                alt={baseUrl}
-              />
-            </MuiIconButton>
-            <Typography variant="caption" align="center" component="p">
-              {item.name}
-            </Typography>
+            <Chip
+              clickable
+              avatar={icon}
+              label={label}
+              color="primary"
+              variant="outlined"
+              onClick={() => onOpenUrl(item.url)}
+              deleteIcon={
+                props.isOwner ? (
+                  <Delete
+                    fontSize="small"
+                    style={{ color: colorSet.errorBase }}
+                  />
+                ) : (
+                  <></>
+                )
+              }
+              onDelete={() => props.onDelete(item.name, item.id)}
+            />
           </Grid>
         );
       })}
-    </Grid>
+    </React.Fragment>
   );
 };
 

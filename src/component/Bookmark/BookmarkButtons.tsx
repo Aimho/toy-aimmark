@@ -1,14 +1,14 @@
 import React from "react";
-import { useRecoilValue } from "recoil";
 import { Grid } from "@material-ui/core";
 import BookmarkDialog from "./BookmarkDialog";
-import { userState } from "../../recoils/userState";
 
-const BookmarkButtons = () => {
-  const { id } = useRecoilValue(userState);
+interface Props {
+  isOwner: boolean;
+  refetch: () => void;
+}
 
-  if (!id) return null;
-
+const BookmarkButtons = ({ isOwner, refetch }: Props) => {
+  if (!isOwner) return null;
   return (
     <Grid container justify="flex-end" alignItems="center" spacing={1}>
       {/* todo align item */}
@@ -26,7 +26,7 @@ const BookmarkButtons = () => {
         </ButtonGroup>
       </Grid> */}
       <Grid item>
-        <BookmarkDialog />
+        <BookmarkDialog onCloseCallBack={refetch} />
       </Grid>
     </Grid>
   );

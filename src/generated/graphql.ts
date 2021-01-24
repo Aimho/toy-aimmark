@@ -697,6 +697,13 @@ export type InsertItemMutationVariables = Exact<{
 
 export type InsertItemMutation = { __typename?: 'mutation_root', insert_item_one?: Maybe<{ __typename?: 'item', id: any }> };
 
+export type DeleteItemMutationVariables = Exact<{
+  id: Scalars['uuid'];
+}>;
+
+
+export type DeleteItemMutation = { __typename?: 'mutation_root', delete_item_by_pk?: Maybe<{ __typename?: 'item', id: any, name: string, url: string, user_id?: Maybe<string> }> };
+
 export type InsertUserMutationVariables = Exact<{
   id: Scalars['String'];
   uid: Scalars['String'];
@@ -791,6 +798,41 @@ export function useInsertItemMutation(baseOptions?: Apollo.MutationHookOptions<I
 export type InsertItemMutationHookResult = ReturnType<typeof useInsertItemMutation>;
 export type InsertItemMutationResult = Apollo.MutationResult<InsertItemMutation>;
 export type InsertItemMutationOptions = Apollo.BaseMutationOptions<InsertItemMutation, InsertItemMutationVariables>;
+export const DeleteItemDocument = gql`
+    mutation deleteItem($id: uuid!) {
+  delete_item_by_pk(id: $id) {
+    id
+    name
+    url
+    user_id
+  }
+}
+    `;
+export type DeleteItemMutationFn = Apollo.MutationFunction<DeleteItemMutation, DeleteItemMutationVariables>;
+
+/**
+ * __useDeleteItemMutation__
+ *
+ * To run a mutation, you first call `useDeleteItemMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteItemMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteItemMutation, { data, loading, error }] = useDeleteItemMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useDeleteItemMutation(baseOptions?: Apollo.MutationHookOptions<DeleteItemMutation, DeleteItemMutationVariables>) {
+        return Apollo.useMutation<DeleteItemMutation, DeleteItemMutationVariables>(DeleteItemDocument, baseOptions);
+      }
+export type DeleteItemMutationHookResult = ReturnType<typeof useDeleteItemMutation>;
+export type DeleteItemMutationResult = Apollo.MutationResult<DeleteItemMutation>;
+export type DeleteItemMutationOptions = Apollo.BaseMutationOptions<DeleteItemMutation, DeleteItemMutationVariables>;
 export const InsertUserDocument = gql`
     mutation insertUser($id: String!, $uid: String!, $email: String!) {
   insert_user_one(object: {id: $id, uid: $uid, email: $email}) {
