@@ -1,8 +1,6 @@
 import React from "react";
-import { Delete } from "@material-ui/icons";
 import { Chip, Grid, Typography } from "@material-ui/core";
-import colorSet from "../../styles/colorSet";
-import { MuiAvatar } from "./style";
+import { MuiAvatar, MuiClose } from "./style";
 
 interface Props {
   isOwner: boolean;
@@ -39,16 +37,7 @@ const BookmarkPresenter = (props: Props) => {
               color="primary"
               variant="outlined"
               onClick={() => onOpenUrl(item.url)}
-              deleteIcon={
-                props.isOwner ? (
-                  <Delete
-                    fontSize="small"
-                    style={{ color: colorSet.errorBase }}
-                  />
-                ) : (
-                  <></>
-                )
-              }
+              deleteIcon={props.isOwner ? <MuiClose /> : <></>}
               onDelete={() => props.onDelete(item.name, item.id)}
             />
           </Grid>
