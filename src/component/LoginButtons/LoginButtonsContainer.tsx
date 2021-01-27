@@ -11,7 +11,6 @@ import {
   useGetUserLazyQuery,
   useInsertUserMutation,
 } from "../../generated/graphql";
-import Loading from "../Loading";
 import LogoutButtonPresenter from "./LogoutButtonPresenter";
 import { TSearchEngine } from "../SearchBar/type";
 
@@ -95,11 +94,13 @@ const LoginButtonsContainer = () => {
 
   return (
     <React.Fragment>
-      <Loading open={loading} />
       {id ? (
         <LogoutButtonPresenter id={id} onSignOut={onSignOut} />
       ) : (
-        <LoginButtonsPresenter onSignInGoogle={onSignInGoogle} />
+        <LoginButtonsPresenter
+          loading={loading}
+          onSignInGoogle={onSignInGoogle}
+        />
       )}
     </React.Fragment>
   );

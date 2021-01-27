@@ -5,7 +5,7 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 import config from "../config";
 
 const httpLink = new HttpLink({
-  uri: `https://${config.hasura.url}`,
+  uri: `${config.hasura.url}`,
   headers: {
     "x-hasura-admin-secret": config.hasura.secret,
   },

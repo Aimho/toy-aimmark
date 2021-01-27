@@ -22,7 +22,7 @@ const BookmarkContainer = () => {
   });
 
   const m_userState = useRecoilValue(userState);
-  const [deleteItem] = useDeleteItemMutation();
+  const [deleteItem, deleteItemState] = useDeleteItemMutation();
   const isOwner = id === m_userState.id ? true : false;
   const onDelete = (name: string, id: string) => {
     if (!isOwner) return null;
@@ -47,13 +47,13 @@ const BookmarkContainer = () => {
           <BookmarkButtons isOwner={isOwner} refetch={refetch} />
         </Grid>
       </Grid>
-      <Grid container spacing={2}>
-        <BookmarkPresenter
-          isOwner={isOwner}
-          onDelete={onDelete}
-          items={data?.item as any}
-        />
-      </Grid>
+
+      <BookmarkPresenter
+        isOwner={isOwner}
+        onDelete={onDelete}
+        loading={deleteItemState.loading}
+        items={data?.item as any}
+      />
     </React.Fragment>
   );
 };

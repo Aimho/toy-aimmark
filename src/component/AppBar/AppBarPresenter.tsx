@@ -16,20 +16,6 @@ function AppBarPresenter() {
               AimMark
             </Typography>
           </Link>
-          {/* todo: tag search updates */}
-          {/* <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <Search />
-            </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ "aria-label": "search" }}
-            />
-          </div> */}
 
           <LoginButtons />
         </Toolbar>
