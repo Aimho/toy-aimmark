@@ -1,11 +1,12 @@
 import React from "react";
 import { Container, Typography } from "@material-ui/core";
 
-import { StyledHome, StyledHomeContent, StyledHomeHeader } from "./style";
 import Bookmark from "../../component/Bookmark";
+import { TBookmarkItem } from "../../component/Bookmark/type";
+import { StyledHome, StyledHomeContent, StyledHomeHeader } from "./style";
 
 interface Props {
-  items?: Array<{ url: string; name: string; id: any }>;
+  items?: TBookmarkItem;
 }
 
 function HomePresenter({ items }: Props) {

@@ -12,6 +12,19 @@ export type Scalars = {
   uuid: any;
 };
 
+/** expression to compare columns of type Boolean. All fields are combined with logical 'AND'. */
+export type Boolean_Comparison_Exp = {
+  _eq?: Maybe<Scalars['Boolean']>;
+  _gt?: Maybe<Scalars['Boolean']>;
+  _gte?: Maybe<Scalars['Boolean']>;
+  _in?: Maybe<Array<Scalars['Boolean']>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _lt?: Maybe<Scalars['Boolean']>;
+  _lte?: Maybe<Scalars['Boolean']>;
+  _neq?: Maybe<Scalars['Boolean']>;
+  _nin?: Maybe<Array<Scalars['Boolean']>>;
+};
+
 /** expression to compare columns of type String. All fields are combined with logical 'AND'. */
 export type String_Comparison_Exp = {
   _eq?: Maybe<Scalars['String']>;
@@ -35,6 +48,7 @@ export type String_Comparison_Exp = {
 export type Item = {
   __typename?: 'item';
   id: Scalars['uuid'];
+  is_private?: Maybe<Scalars['Boolean']>;
   name: Scalars['String'];
   url: Scalars['String'];
   user_id?: Maybe<Scalars['String']>;
@@ -81,6 +95,7 @@ export type Item_Bool_Exp = {
   _not?: Maybe<Item_Bool_Exp>;
   _or?: Maybe<Array<Maybe<Item_Bool_Exp>>>;
   id?: Maybe<Uuid_Comparison_Exp>;
+  is_private?: Maybe<Boolean_Comparison_Exp>;
   name?: Maybe<String_Comparison_Exp>;
   url?: Maybe<String_Comparison_Exp>;
   user_id?: Maybe<String_Comparison_Exp>;
@@ -95,6 +110,7 @@ export enum Item_Constraint {
 /** input type for inserting data into table "item" */
 export type Item_Insert_Input = {
   id?: Maybe<Scalars['uuid']>;
+  is_private?: Maybe<Scalars['Boolean']>;
   name?: Maybe<Scalars['String']>;
   url?: Maybe<Scalars['String']>;
   user_id?: Maybe<Scalars['String']>;
@@ -159,6 +175,7 @@ export type Item_On_Conflict = {
 /** ordering options when selecting data from "item" */
 export type Item_Order_By = {
   id?: Maybe<Order_By>;
+  is_private?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
   url?: Maybe<Order_By>;
   user_id?: Maybe<Order_By>;
@@ -174,6 +191,8 @@ export enum Item_Select_Column {
   /** column name */
   Id = 'id',
   /** column name */
+  IsPrivate = 'is_private',
+  /** column name */
   Name = 'name',
   /** column name */
   Url = 'url',
@@ -184,6 +203,7 @@ export enum Item_Select_Column {
 /** input type for updating data in table "item" */
 export type Item_Set_Input = {
   id?: Maybe<Scalars['uuid']>;
+  is_private?: Maybe<Scalars['Boolean']>;
   name?: Maybe<Scalars['String']>;
   url?: Maybe<Scalars['String']>;
   user_id?: Maybe<Scalars['String']>;
@@ -193,6 +213,8 @@ export type Item_Set_Input = {
 export enum Item_Update_Column {
   /** column name */
   Id = 'id',
+  /** column name */
+  IsPrivate = 'is_private',
   /** column name */
   Name = 'name',
   /** column name */
@@ -686,7 +708,7 @@ export type GetUserItemQueryVariables = Exact<{
 }>;
 
 
-export type GetUserItemQuery = { __typename?: 'query_root', item: Array<{ __typename?: 'item', id: any, url: string, name: string }> };
+export type GetUserItemQuery = { __typename?: 'query_root', item: Array<{ __typename?: 'item', id: any, url: string, name: string, is_private?: Maybe<boolean> }> };
 
 export type GetAllItemQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -697,6 +719,7 @@ export type InsertItemMutationVariables = Exact<{
   user_id: Scalars['String'];
   url: Scalars['String'];
   name: Scalars['String'];
+  is_private: Scalars['Boolean'];
 }>;
 
 
@@ -740,6 +763,7 @@ export const GetUserItemDocument = gql`
     id
     url
     name
+    is_private
   }
 }
     `;
@@ -771,7 +795,7 @@ export type GetUserItemLazyQueryHookResult = ReturnType<typeof useGetUserItemLaz
 export type GetUserItemQueryResult = Apollo.QueryResult<GetUserItemQuery, GetUserItemQueryVariables>;
 export const GetAllItemDocument = gql`
     query getAllItem {
-  item {
+  item(where: {is_private: {_eq: false}}) {
     id
     url
     name
@@ -804,8 +828,10 @@ export type GetAllItemQueryHookResult = ReturnType<typeof useGetAllItemQuery>;
 export type GetAllItemLazyQueryHookResult = ReturnType<typeof useGetAllItemLazyQuery>;
 export type GetAllItemQueryResult = Apollo.QueryResult<GetAllItemQuery, GetAllItemQueryVariables>;
 export const InsertItemDocument = gql`
-    mutation insertItem($user_id: String!, $url: String!, $name: String!) {
-  insert_item_one(object: {user_id: $user_id, url: $url, name: $name}) {
+    mutation insertItem($user_id: String!, $url: String!, $name: String!, $is_private: Boolean!) {
+  insert_item_one(
+    object: {url: $url, name: $name, user_id: $user_id, is_private: $is_private}
+  ) {
     id
   }
 }
@@ -828,6 +854,7 @@ export type InsertItemMutationFn = Apollo.MutationFunction<InsertItemMutation, I
  *      user_id: // value for 'user_id'
  *      url: // value for 'url'
  *      name: // value for 'name'
+ *      is_private: // value for 'is_private'
  *   },
  * });
  */

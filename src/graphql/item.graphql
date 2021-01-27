@@ -3,19 +3,32 @@ query getUserItem($user_id: String!) {
     id
     url
     name
+    is_private
   }
 }
 
 query getAllItem {
-  item {
+  item(where: { is_private: { _eq: false } }) {
     id
     url
     name
   }
 }
 
-mutation insertItem($user_id: String!, $url: String!, $name: String!) {
-  insert_item_one(object: { user_id: $user_id, url: $url, name: $name }) {
+mutation insertItem(
+  $user_id: String!
+  $url: String!
+  $name: String!
+  $is_private: Boolean!
+) {
+  insert_item_one(
+    object: {
+      url: $url
+      name: $name
+      user_id: $user_id
+      is_private: $is_private
+    }
+  ) {
     id
   }
 }

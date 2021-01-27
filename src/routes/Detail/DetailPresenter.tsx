@@ -3,6 +3,7 @@ import { Container } from "@material-ui/core";
 
 import Bookmark from "../../component/Bookmark";
 import SearchBar from "../../component/SearchBar";
+import { TBookmarkItem } from "../../component/Bookmark/type";
 import BookmarkDialogButton from "../../component/BookmarkDialogButton";
 import { StyledDetail, StyledDetailHeader } from "./style";
 
@@ -11,7 +12,7 @@ interface Props {
   refetch: () => void;
   onDelete: (name: string, id: string) => void;
   deleteLoading: boolean;
-  items?: Array<{ url: string; name: string; id: any }>;
+  items?: TBookmarkItem;
 }
 
 function DetailPresenter({

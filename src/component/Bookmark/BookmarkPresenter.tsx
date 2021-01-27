@@ -1,12 +1,13 @@
 import React from "react";
 import { ButtonBase, Grid, Typography } from "@material-ui/core";
-import { MuiCircleProgress, MuiClose, MuiPaper } from "./style";
+import { MuiCircleProgress, MuiClose, MuiPaper, MuiPrivate } from "./style";
+import { TBookmarkItem } from "./type";
 
 interface Props {
   isOwner?: boolean;
   onDelete?: (name: string, id: string) => void;
   loading?: boolean;
-  items?: Array<{ url: string; name: string; id: any }>;
+  items?: TBookmarkItem;
 }
 
 const BookmarkPresenter = (props: Props) => (
@@ -23,6 +24,11 @@ const BookmarkPresenter = (props: Props) => (
         onError: (e: any) => {
           e.target.src = `https://www.google.com/s2/favicons?sz=64&domain_url=${baseUrl}`;
         },
+      };
+
+      const PrivateIcon = () => {
+        if (!item.is_private) return null;
+        return <MuiPrivate />;
       };
 
       const DeleteButton = () => {
@@ -42,6 +48,7 @@ const BookmarkPresenter = (props: Props) => (
         <Grid item key={index}>
           <ButtonBase focusRipple onClick={onOpenUrl}>
             <MuiPaper>
+              <PrivateIcon />
               <DeleteButton />
               <img alt={item.name} {...imgProps} />
               <Typography variant="caption">{item.name}</Typography>

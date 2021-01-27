@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 import { Avatar, CircularProgress, Paper } from "@material-ui/core";
-import { CloseRounded } from "@material-ui/icons";
+import { CloseRounded, VisibilityOffRounded } from "@material-ui/icons";
 import colorSet from "../../styles/colorSet";
 
 export const MuiAvatar = styled(Avatar)`
@@ -31,6 +31,16 @@ export const MuiClose = styled(CloseRounded)`
   &:hover {
     color: ${colorSet.gray900};
   }
+`;
+
+export const MuiPrivate = styled(VisibilityOffRounded)`
+  ${iconButtonPosition}
+  right: none;
+  left: 8px;
+
+  width: 16px;
+  height: 16px;
+  color: ${colorSet.gray600};
 `;
 
 export const MuiPaper = styled(Paper)`
