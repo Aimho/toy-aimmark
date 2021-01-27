@@ -91,7 +91,7 @@ const BookmarkDialog = ({ onCloseCallBack }: Props) => {
             </Grid>
           </DialogContent>
           <DialogActions>
-            <Button variant="text" color="secondary" onClick={onCloseDialog}>
+            <Button variant="text" onClick={onCloseDialog}>
               취소
             </Button>
             <Button variant="text" color="primary" type="submit">

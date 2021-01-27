@@ -1,8 +1,7 @@
 import React from "react";
 import { useRecoilValue } from "recoil";
-import { Grid } from "@material-ui/core";
-import { useParams } from "react-router-dom";
 import { useSnackbar } from "notistack";
+import { useParams } from "react-router-dom";
 
 import { userState } from "../../recoils/userState";
 
@@ -10,11 +9,9 @@ import {
   useDeleteItemMutation,
   useGetUserItemQuery,
 } from "../../generated/graphql";
+import DetailPresenter from "./DetailPresenter";
 
-import BookmarkPresenter from "./BookmarkPresenter";
-import BookmarkButtons from "./BookmarkButtons";
-
-const BookmarkContainer = () => {
+function Detail() {
   const { id } = useParams() as any;
   const { enqueueSnackbar } = useSnackbar();
   const { data, refetch } = useGetUserItemQuery({
@@ -41,21 +38,14 @@ const BookmarkContainer = () => {
   };
 
   return (
-    <React.Fragment>
-      <Grid container spacing={2}>
-        <Grid item xs={12}>
-          <BookmarkButtons isOwner={isOwner} refetch={refetch} />
-        </Grid>
-      </Grid>
-
-      <BookmarkPresenter
-        isOwner={isOwner}
-        onDelete={onDelete}
-        loading={deleteItemState.loading}
-        items={data?.item as any}
-      />
-    </React.Fragment>
+    <DetailPresenter
+      isOwner={isOwner}
+      refetch={refetch}
+      onDelete={onDelete}
+      deleteLoading={deleteItemState.loading}
+      items={data?.item}
+    />
   );
-};
+}
 
-export default BookmarkContainer;
+export default Detail;

@@ -3,9 +3,9 @@ import { ButtonBase, Grid, Typography } from "@material-ui/core";
 import { MuiCircleProgress, MuiClose, MuiPaper } from "./style";
 
 interface Props {
-  isOwner: boolean;
-  onDelete: (name: string, id: string) => void;
-  loading: boolean;
+  isOwner?: boolean;
+  onDelete?: (name: string, id: string) => void;
+  loading?: boolean;
   items?: Array<{ url: string; name: string; id: any }>;
 }
 
@@ -31,7 +31,7 @@ const BookmarkPresenter = (props: Props) => (
         const onDelete = (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
           e.preventDefault();
           e.stopPropagation();
-          props.onDelete(item.name, item.id);
+          props.onDelete!(item.name, item.id);
         };
 
         if (props.loading) return <MuiCircleProgress size={16} />;

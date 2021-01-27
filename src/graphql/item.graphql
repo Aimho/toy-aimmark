@@ -6,6 +6,14 @@ query getUserItem($user_id: String!) {
   }
 }
 
+query getAllItem {
+  item {
+    id
+    url
+    name
+  }
+}
+
 mutation insertItem($user_id: String!, $url: String!, $name: String!) {
   insert_item_one(object: { user_id: $user_id, url: $url, name: $name }) {
     id

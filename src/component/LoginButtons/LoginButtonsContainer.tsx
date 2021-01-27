@@ -38,7 +38,6 @@ const LoginButtonsContainer = () => {
       setUser.id(id);
       setUser.email(email);
       setUser.searchEngine(search_engine);
-      history.push(`/${id}`);
     }
   }, [id, setUser, userByPk, history]);
 
@@ -80,15 +79,16 @@ const LoginButtonsContainer = () => {
       getUser({
         variables: { uid },
       });
+      history.push(`/${id}`);
     } catch (error) {
       console.error(error);
     }
   };
 
   const onSignOut = async () => {
-    getUser({ variables: { uid: "" } });
     setUser.id("");
     setUser.email("");
+    getUser({ variables: { uid: "" } });
     await firebase.auth().signOut();
   };
 

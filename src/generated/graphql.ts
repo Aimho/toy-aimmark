@@ -688,6 +688,11 @@ export type GetUserItemQueryVariables = Exact<{
 
 export type GetUserItemQuery = { __typename?: 'query_root', item: Array<{ __typename?: 'item', id: any, url: string, name: string }> };
 
+export type GetAllItemQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAllItemQuery = { __typename?: 'query_root', item: Array<{ __typename?: 'item', id: any, url: string, name: string }> };
+
 export type InsertItemMutationVariables = Exact<{
   user_id: Scalars['String'];
   url: Scalars['String'];
@@ -764,6 +769,40 @@ export function useGetUserItemLazyQuery(baseOptions?: Apollo.LazyQueryHookOption
 export type GetUserItemQueryHookResult = ReturnType<typeof useGetUserItemQuery>;
 export type GetUserItemLazyQueryHookResult = ReturnType<typeof useGetUserItemLazyQuery>;
 export type GetUserItemQueryResult = Apollo.QueryResult<GetUserItemQuery, GetUserItemQueryVariables>;
+export const GetAllItemDocument = gql`
+    query getAllItem {
+  item {
+    id
+    url
+    name
+  }
+}
+    `;
+
+/**
+ * __useGetAllItemQuery__
+ *
+ * To run a query within a React component, call `useGetAllItemQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAllItemQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAllItemQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetAllItemQuery(baseOptions?: Apollo.QueryHookOptions<GetAllItemQuery, GetAllItemQueryVariables>) {
+        return Apollo.useQuery<GetAllItemQuery, GetAllItemQueryVariables>(GetAllItemDocument, baseOptions);
+      }
+export function useGetAllItemLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAllItemQuery, GetAllItemQueryVariables>) {
+          return Apollo.useLazyQuery<GetAllItemQuery, GetAllItemQueryVariables>(GetAllItemDocument, baseOptions);
+        }
+export type GetAllItemQueryHookResult = ReturnType<typeof useGetAllItemQuery>;
+export type GetAllItemLazyQueryHookResult = ReturnType<typeof useGetAllItemLazyQuery>;
+export type GetAllItemQueryResult = Apollo.QueryResult<GetAllItemQuery, GetAllItemQueryVariables>;
 export const InsertItemDocument = gql`
     mutation insertItem($user_id: String!, $url: String!, $name: String!) {
   insert_item_one(object: {user_id: $user_id, url: $url, name: $name}) {
