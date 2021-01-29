@@ -20,9 +20,16 @@ const BookmarkPresenter = (props: Props) => (
       const baseUrl = new URL(item.url).origin;
 
       const imgProps = {
-        src: `${baseUrl}/favicon.ico`,
+        src: `https://www.google.com/s2/favicons?sz=32&domain_url=${baseUrl}`,
+        // src: `${baseUrl}/favicon.ico`,
         onError: (e: any) => {
-          e.target.src = `https://www.google.com/s2/favicons?sz=64&domain_url=${baseUrl}`;
+          e.target.src = `${baseUrl}/favicon.ico`;
+        },
+        onLoad: (e: any) => {
+          if (e.target.offsetWidth === 16) {
+            e.target.src = `${baseUrl}/favicon.ico`;
+            e.target.classList.add("resize");
+          }
         },
       };
 

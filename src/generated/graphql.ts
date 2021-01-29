@@ -705,6 +705,7 @@ export type Uuid_Comparison_Exp = {
 
 export type GetUserItemQueryVariables = Exact<{
   user_id: Scalars['String'];
+  is_private?: Maybe<Scalars['Boolean']>;
 }>;
 
 
@@ -758,8 +759,8 @@ export type UpdateUserMutation = { __typename?: 'mutation_root', update_user?: M
 
 
 export const GetUserItemDocument = gql`
-    query getUserItem($user_id: String!) {
-  item(where: {user_id: {_eq: $user_id}}) {
+    query getUserItem($user_id: String!, $is_private: Boolean) {
+  item(where: {user_id: {_eq: $user_id}, is_private: {_eq: $is_private}}) {
     id
     url
     name
@@ -781,6 +782,7 @@ export const GetUserItemDocument = gql`
  * const { data, loading, error } = useGetUserItemQuery({
  *   variables: {
  *      user_id: // value for 'user_id'
+ *      is_private: // value for 'is_private'
  *   },
  * });
  */

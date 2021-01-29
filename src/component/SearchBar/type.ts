@@ -1,1 +1,1 @@
-export type TSearchEngine = "google" | "naver";
+export type TSearchEngine = "google" | "naver" | "youtube";

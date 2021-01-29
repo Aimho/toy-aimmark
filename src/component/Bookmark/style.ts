@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 import { Avatar, CircularProgress, Paper } from "@material-ui/core";
-import { CloseRounded, VisibilityOffRounded } from "@material-ui/icons";
+import { CloseRounded, LockRounded } from "@material-ui/icons";
 import colorSet from "../../styles/colorSet";
 
 export const MuiAvatar = styled(Avatar)`
@@ -33,7 +33,7 @@ export const MuiClose = styled(CloseRounded)`
   }
 `;
 
-export const MuiPrivate = styled(VisibilityOffRounded)`
+export const MuiPrivate = styled(LockRounded)`
   ${iconButtonPosition}
   right: none;
   left: 8px;
@@ -57,8 +57,10 @@ export const MuiPaper = styled(Paper)`
   }
 
   img {
-    width: 32px;
-    height: 32px;
     margin-bottom: 8px;
+    &.resize {
+      width: 32px;
+      height: 32px;
+    }
   }
 `;

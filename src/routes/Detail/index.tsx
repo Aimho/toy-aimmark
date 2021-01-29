@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useRecoilValue } from "recoil";
 import { useSnackbar } from "notistack";
 import { useParams } from "react-router-dom";
@@ -14,13 +14,19 @@ import DetailPresenter from "./DetailPresenter";
 function Detail() {
   const { id } = useParams() as any;
   const { enqueueSnackbar } = useSnackbar();
-  const { data, refetch } = useGetUserItemQuery({
-    variables: { user_id: id },
-  });
 
   const m_userState = useRecoilValue(userState);
-  const [deleteItem, deleteItemState] = useDeleteItemMutation();
   const isOwner = id === m_userState.id ? true : false;
+
+  const { data, refetch } = useGetUserItemQuery({
+    variables: { user_id: id, is_private: !isOwner ? false : null },
+  });
+
+  useEffect(() => {
+    refetch();
+  }, [isOwner, refetch]);
+
+  const [deleteItem, deleteItemState] = useDeleteItemMutation();
   const onDelete = (name: string, id: string) => {
     if (!isOwner) return null;
     deleteItem({ variables: { id } })
