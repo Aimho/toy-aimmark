@@ -47,9 +47,9 @@ export type String_Comparison_Exp = {
 /** columns and relationships of "item" */
 export type Item = {
   __typename?: 'item';
-  base_url?: Maybe<Scalars['String']>;
+  base_url: Scalars['String'];
   id: Scalars['uuid'];
-  is_private?: Maybe<Scalars['Boolean']>;
+  is_private: Scalars['Boolean'];
   name: Scalars['String'];
   url: Scalars['String'];
   user_id?: Maybe<Scalars['String']>;
@@ -722,12 +722,12 @@ export type GetUserItemQueryVariables = Exact<{
 }>;
 
 
-export type GetUserItemQuery = { __typename?: 'query_root', item: Array<{ __typename?: 'item', id: any, url: string, name: string, base_url?: Maybe<string>, is_private?: Maybe<boolean> }> };
+export type GetUserItemQuery = { __typename?: 'query_root', item: Array<{ __typename?: 'item', id: any, url: string, name: string, base_url: string, is_private: boolean }> };
 
 export type GetAllItemQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetAllItemQuery = { __typename?: 'query_root', item: Array<{ __typename?: 'item', id: any, url: string, name: string, base_url?: Maybe<string> }> };
+export type GetAllItemQuery = { __typename?: 'query_root', item: Array<{ __typename?: 'item', id: any, url: string, name: string, base_url: string }> };
 
 export type InsertItemMutationVariables = Exact<{
   url: Scalars['String'];

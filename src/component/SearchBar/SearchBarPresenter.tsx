@@ -2,7 +2,6 @@ import React from "react";
 import {
   TextField,
   InputAdornment,
-  Select,
   MenuItem,
   CircularProgress,
   Grid,
@@ -79,7 +78,6 @@ const SearchBarPresenter = (props: Props) => {
   return (
     <TextField
       fullWidth
-      placeholder="검색 또는 URL 입력"
       onKeyUp={onKeyUp}
       InputProps={{
         startAdornment: StartAdornment(),

@@ -1,4 +1,4 @@
-import { MenuItem, Select } from "@material-ui/core";
+import { Select } from "@material-ui/core";
 import styled from "styled-components";
 
 export const MenuItemLoading = styled.div`

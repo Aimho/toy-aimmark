@@ -1,11 +1,5 @@
 import styled, { css } from "styled-components";
-import {
-  Avatar,
-  ButtonBase,
-  CircularProgress,
-  Grid,
-  Paper,
-} from "@material-ui/core";
+import { Avatar, ButtonBase, CircularProgress, Paper } from "@material-ui/core";
 import { CloseRounded, LockRounded } from "@material-ui/icons";
 import colorSet from "../../styles/colorSet";
 
