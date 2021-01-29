@@ -5,5 +5,6 @@ export type TBookmarkItem = Array<{
   id: any;
   url: string;
   name: string;
+  base_url?: Maybe<string>;
   is_private?: Maybe<boolean>;
 }>;

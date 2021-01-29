@@ -5,6 +5,7 @@ query getUserItem($user_id: String!, $is_private: Boolean) {
     id
     url
     name
+    base_url
     is_private
   }
 }
@@ -14,18 +15,21 @@ query getAllItem {
     id
     url
     name
+    base_url
   }
 }
 
 mutation insertItem(
-  $user_id: String!
   $url: String!
+  $base_url: String!
   $name: String!
+  $user_id: String!
   $is_private: Boolean!
 ) {
   insert_item_one(
     object: {
       url: $url
+      base_url: $base_url
       name: $name
       user_id: $user_id
       is_private: $is_private
@@ -38,8 +42,5 @@ mutation insertItem(
 mutation deleteItem($id: uuid!) {
   delete_item_by_pk(id: $id) {
     id
-    name
-    url
-    user_id
   }
 }

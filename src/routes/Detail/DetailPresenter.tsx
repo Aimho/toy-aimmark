@@ -5,7 +5,11 @@ import Bookmark from "../../component/Bookmark";
 import SearchBar from "../../component/SearchBar";
 import { TBookmarkItem } from "../../component/Bookmark/type";
 import BookmarkDialogButton from "../../component/BookmarkDialogButton";
-import { StyledDetail, StyledDetailHeader } from "./style";
+import {
+  StyledDetail,
+  StyledDetailHeader,
+  StyledDetailContentAction,
+} from "./style";
 
 interface Props {
   isOwner: boolean;
@@ -29,7 +33,9 @@ function DetailPresenter({
           <SearchBar />
         </StyledDetailHeader>
 
-        <BookmarkDialogButton isOwner={isOwner} refetch={refetch} />
+        <StyledDetailContentAction>
+          <BookmarkDialogButton isOwner={isOwner} refetch={refetch} />
+        </StyledDetailContentAction>
 
         <Bookmark
           isOwner={isOwner}

@@ -47,6 +47,7 @@ export type String_Comparison_Exp = {
 /** columns and relationships of "item" */
 export type Item = {
   __typename?: 'item';
+  base_url?: Maybe<Scalars['String']>;
   id: Scalars['uuid'];
   is_private?: Maybe<Scalars['Boolean']>;
   name: Scalars['String'];
@@ -94,6 +95,7 @@ export type Item_Bool_Exp = {
   _and?: Maybe<Array<Maybe<Item_Bool_Exp>>>;
   _not?: Maybe<Item_Bool_Exp>;
   _or?: Maybe<Array<Maybe<Item_Bool_Exp>>>;
+  base_url?: Maybe<String_Comparison_Exp>;
   id?: Maybe<Uuid_Comparison_Exp>;
   is_private?: Maybe<Boolean_Comparison_Exp>;
   name?: Maybe<String_Comparison_Exp>;
@@ -109,6 +111,7 @@ export enum Item_Constraint {
 
 /** input type for inserting data into table "item" */
 export type Item_Insert_Input = {
+  base_url?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
   is_private?: Maybe<Scalars['Boolean']>;
   name?: Maybe<Scalars['String']>;
@@ -119,6 +122,7 @@ export type Item_Insert_Input = {
 /** aggregate max on columns */
 export type Item_Max_Fields = {
   __typename?: 'item_max_fields';
+  base_url?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
   name?: Maybe<Scalars['String']>;
   url?: Maybe<Scalars['String']>;
@@ -127,6 +131,7 @@ export type Item_Max_Fields = {
 
 /** order by max() on columns of table "item" */
 export type Item_Max_Order_By = {
+  base_url?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
   url?: Maybe<Order_By>;
@@ -136,6 +141,7 @@ export type Item_Max_Order_By = {
 /** aggregate min on columns */
 export type Item_Min_Fields = {
   __typename?: 'item_min_fields';
+  base_url?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
   name?: Maybe<Scalars['String']>;
   url?: Maybe<Scalars['String']>;
@@ -144,6 +150,7 @@ export type Item_Min_Fields = {
 
 /** order by min() on columns of table "item" */
 export type Item_Min_Order_By = {
+  base_url?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
   url?: Maybe<Order_By>;
@@ -174,6 +181,7 @@ export type Item_On_Conflict = {
 
 /** ordering options when selecting data from "item" */
 export type Item_Order_By = {
+  base_url?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   is_private?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
@@ -189,6 +197,8 @@ export type Item_Pk_Columns_Input = {
 /** select columns of table "item" */
 export enum Item_Select_Column {
   /** column name */
+  BaseUrl = 'base_url',
+  /** column name */
   Id = 'id',
   /** column name */
   IsPrivate = 'is_private',
@@ -202,6 +212,7 @@ export enum Item_Select_Column {
 
 /** input type for updating data in table "item" */
 export type Item_Set_Input = {
+  base_url?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
   is_private?: Maybe<Scalars['Boolean']>;
   name?: Maybe<Scalars['String']>;
@@ -211,6 +222,8 @@ export type Item_Set_Input = {
 
 /** update columns of table "item" */
 export enum Item_Update_Column {
+  /** column name */
+  BaseUrl = 'base_url',
   /** column name */
   Id = 'id',
   /** column name */
@@ -709,17 +722,18 @@ export type GetUserItemQueryVariables = Exact<{
 }>;
 
 
-export type GetUserItemQuery = { __typename?: 'query_root', item: Array<{ __typename?: 'item', id: any, url: string, name: string, is_private?: Maybe<boolean> }> };
+export type GetUserItemQuery = { __typename?: 'query_root', item: Array<{ __typename?: 'item', id: any, url: string, name: string, base_url?: Maybe<string>, is_private?: Maybe<boolean> }> };
 
 export type GetAllItemQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetAllItemQuery = { __typename?: 'query_root', item: Array<{ __typename?: 'item', id: any, url: string, name: string }> };
+export type GetAllItemQuery = { __typename?: 'query_root', item: Array<{ __typename?: 'item', id: any, url: string, name: string, base_url?: Maybe<string> }> };
 
 export type InsertItemMutationVariables = Exact<{
-  user_id: Scalars['String'];
   url: Scalars['String'];
+  base_url: Scalars['String'];
   name: Scalars['String'];
+  user_id: Scalars['String'];
   is_private: Scalars['Boolean'];
 }>;
 
@@ -731,7 +745,7 @@ export type DeleteItemMutationVariables = Exact<{
 }>;
 
 
-export type DeleteItemMutation = { __typename?: 'mutation_root', delete_item_by_pk?: Maybe<{ __typename?: 'item', id: any, name: string, url: string, user_id?: Maybe<string> }> };
+export type DeleteItemMutation = { __typename?: 'mutation_root', delete_item_by_pk?: Maybe<{ __typename?: 'item', id: any }> };
 
 export type InsertUserMutationVariables = Exact<{
   id: Scalars['String'];
@@ -764,6 +778,7 @@ export const GetUserItemDocument = gql`
     id
     url
     name
+    base_url
     is_private
   }
 }
@@ -801,6 +816,7 @@ export const GetAllItemDocument = gql`
     id
     url
     name
+    base_url
   }
 }
     `;
@@ -830,9 +846,9 @@ export type GetAllItemQueryHookResult = ReturnType<typeof useGetAllItemQuery>;
 export type GetAllItemLazyQueryHookResult = ReturnType<typeof useGetAllItemLazyQuery>;
 export type GetAllItemQueryResult = Apollo.QueryResult<GetAllItemQuery, GetAllItemQueryVariables>;
 export const InsertItemDocument = gql`
-    mutation insertItem($user_id: String!, $url: String!, $name: String!, $is_private: Boolean!) {
+    mutation insertItem($url: String!, $base_url: String!, $name: String!, $user_id: String!, $is_private: Boolean!) {
   insert_item_one(
-    object: {url: $url, name: $name, user_id: $user_id, is_private: $is_private}
+    object: {url: $url, base_url: $base_url, name: $name, user_id: $user_id, is_private: $is_private}
   ) {
     id
   }
@@ -853,9 +869,10 @@ export type InsertItemMutationFn = Apollo.MutationFunction<InsertItemMutation, I
  * @example
  * const [insertItemMutation, { data, loading, error }] = useInsertItemMutation({
  *   variables: {
- *      user_id: // value for 'user_id'
  *      url: // value for 'url'
+ *      base_url: // value for 'base_url'
  *      name: // value for 'name'
+ *      user_id: // value for 'user_id'
  *      is_private: // value for 'is_private'
  *   },
  * });
@@ -870,9 +887,6 @@ export const DeleteItemDocument = gql`
     mutation deleteItem($id: uuid!) {
   delete_item_by_pk(id: $id) {
     id
-    name
-    url
-    user_id
   }
 }
     `;

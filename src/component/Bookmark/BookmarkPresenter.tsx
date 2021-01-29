@@ -1,7 +1,15 @@
 import React from "react";
-import { ButtonBase, Grid, Typography } from "@material-ui/core";
-import { MuiCircleProgress, MuiClose, MuiPaper, MuiPrivate } from "./style";
+import { Grid, Typography } from "@material-ui/core";
+import {
+  FaviconContainer,
+  MuiButtonBase,
+  MuiCircleProgress,
+  MuiClose,
+  MuiPaper,
+  MuiPrivate,
+} from "./style";
 import { TBookmarkItem } from "./type";
+import { faviconImgProps, getBaseUrl, openUrl } from "../../utils";
 
 interface Props {
   isOwner?: boolean;
@@ -13,25 +21,7 @@ interface Props {
 const BookmarkPresenter = (props: Props) => (
   <Grid container spacing={2}>
     {props.items?.map((item, index) => {
-      const onOpenUrl = () => {
-        window.open(item.url);
-      };
-
-      const baseUrl = new URL(item.url).origin;
-
-      const imgProps = {
-        src: `https://www.google.com/s2/favicons?sz=32&domain_url=${baseUrl}`,
-        // src: `${baseUrl}/favicon.ico`,
-        onError: (e: any) => {
-          e.target.src = `${baseUrl}/favicon.ico`;
-        },
-        onLoad: (e: any) => {
-          if (e.target.offsetWidth === 16) {
-            e.target.src = `${baseUrl}/favicon.ico`;
-            e.target.classList.add("resize");
-          }
-        },
-      };
+      const baseUrl = item.base_url ? item.base_url : getBaseUrl(item.url);
 
       const PrivateIcon = () => {
         if (!item.is_private) return null;
@@ -51,16 +41,26 @@ const BookmarkPresenter = (props: Props) => (
         return <MuiClose onClick={onDelete} />;
       };
 
+      const gridItemStyle = () => {
+        const grow = Math.floor(item.name.length / 10) + 1;
+        return {
+          flexGrow: grow,
+          maxWidth: "345px",
+        };
+      };
+
       return (
-        <Grid item key={index}>
-          <ButtonBase focusRipple onClick={onOpenUrl}>
+        <Grid item key={index} style={gridItemStyle()}>
+          <MuiButtonBase focusRipple onClick={() => openUrl(item.url)}>
             <MuiPaper>
-              <PrivateIcon />
               <DeleteButton />
-              <img alt={item.name} {...imgProps} />
+              <FaviconContainer>
+                <PrivateIcon />
+                <img alt={item.name} {...faviconImgProps(baseUrl)} />
+              </FaviconContainer>
               <Typography variant="caption">{item.name}</Typography>
             </MuiPaper>
-          </ButtonBase>
+          </MuiButtonBase>
         </Grid>
       );
     })}

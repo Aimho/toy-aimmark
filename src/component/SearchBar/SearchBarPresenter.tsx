@@ -5,14 +5,18 @@ import {
   Select,
   MenuItem,
   CircularProgress,
+  Grid,
 } from "@material-ui/core";
 import { SearchRounded } from "@material-ui/icons";
 import { TSearchEngine } from "./type";
-import { MenuItemLoading } from "./style";
+import { MenuItemLoading, MuiSelect } from "./style";
 
 interface Props {
   loading: boolean;
-  searchEngine: TSearchEngine;
+  searchEngine: {
+    value: TSearchEngine;
+    favicon: (_: TSearchEngine) => React.ReactNode;
+  };
   onChangeSearchEngine: (_: any) => void;
   onSearch: (_: string) => void;
 }
@@ -29,31 +33,39 @@ const SearchBarPresenter = (props: Props) => {
       props.onChangeSearchEngine(event.target.value);
     };
 
-    const selectMenu = (text: string) => {
-      const MenuContent = props.loading ? (
-        <MenuItemLoading>
-          <CircularProgress size={15} />
-        </MenuItemLoading>
-      ) : (
-        text.toUpperCase()
-      );
+    const selectMenu = (text: TSearchEngine) => {
+      if (props.loading)
+        return (
+          <MenuItem value={text}>
+            <MenuItemLoading>
+              <CircularProgress size={15} />
+            </MenuItemLoading>
+          </MenuItem>
+        );
 
-      return <MenuItem value={text}>{MenuContent}</MenuItem>;
+      return (
+        <MenuItem value={text}>
+          <Grid container spacing={1} wrap="nowrap" alignItems="flex-end">
+            <Grid item>{props.searchEngine.favicon(text)}</Grid>
+            <Grid item>{text.toUpperCase()}</Grid>
+          </Grid>
+        </MenuItem>
+      );
     };
 
     return (
       <InputAdornment position="start">
-        <Select
+        <MuiSelect
           id="search-select"
           labelId="search-select"
-          value={props.searchEngine}
+          value={props.searchEngine.value}
           onChange={onChange}
           disableUnderline
         >
           {selectMenu("naver")}
           {selectMenu("google")}
           {selectMenu("youtube")}
-        </Select>
+        </MuiSelect>
       </InputAdornment>
     );
   };

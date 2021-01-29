@@ -40,8 +40,10 @@ const BookmarkDialog = ({ onCloseCallBack }: Props) => {
       return;
     }
 
+    const base_url = new URL(url).origin;
+
     insertItem({
-      variables: { user_id: id, url, name, is_private },
+      variables: { url, base_url, name, user_id: id, is_private },
     }).then(() => {
       onCloseDialog();
       onCloseCallBack();
