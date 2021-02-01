@@ -1,9 +1,8 @@
 import React from "react";
-import { Container, Typography } from "@material-ui/core";
+import { Container, Grid, Typography } from "@material-ui/core";
 
 import Bookmark from "../../component/Bookmark";
 import { TBookmarkItem } from "../../component/Bookmark/type";
-import { StyledHome, StyledHomeContent, StyledHomeHeader } from "./style";
 
 interface Props {
   items?: TBookmarkItem;
@@ -11,23 +10,29 @@ interface Props {
 
 function HomePresenter({ items }: Props) {
   return (
-    <StyledHome>
-      <Container maxWidth="md">
-        <StyledHomeHeader>
-          <Typography variant="h5" align="center">
-            손쉽게 북마크를 만들고 <br />
+    <Container maxWidth="md">
+      <Grid container justify="space-between" spacing={3}>
+        <Grid item xs={12} sm={6}>
+          <Typography
+            variant="h4"
+            align="left"
+            gutterBottom
+            style={{ marginTop: 24 }}
+          >
+            손쉽게
+            <br />
+            <Typography color="primary" variant="h3" component="span">
+              북마크
+            </Typography>
+            를 만들고 <br />
             공유해보세요!
           </Typography>
-        </StyledHomeHeader>
-
-        <StyledHomeContent>
-          <Typography variant="subtitle1" align="center" gutterBottom>
-            등록된 북마크
-          </Typography>
+        </Grid>
+        <Grid item xs={12} sm={6}>
           <Bookmark items={items} />
-        </StyledHomeContent>
-      </Container>
-    </StyledHome>
+        </Grid>
+      </Grid>
+    </Container>
   );
 }
 

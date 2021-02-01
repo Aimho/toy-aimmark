@@ -1,9 +1,11 @@
-import "firebase/auth";
 import React from "react";
 import { useHistory } from "react-router-dom";
+
+import "firebase/auth";
 import firebase from "firebase/app";
 
-import { useSetRecoilState } from "recoil";
+import { useSetRecoilState, useRecoilValue } from "recoil";
+import { renderState } from "../../recoils/renderState";
 import { userId, userEmail, userSearchEngine } from "../../recoils/userState";
 
 import LoginButtonsPresenter from "./LoginButtonsPresenter";
@@ -13,11 +15,13 @@ import {
 } from "../../generated/graphql";
 import LogoutButtonPresenter from "./LogoutButtonPresenter";
 import { TSearchEngine } from "../SearchBar/type";
+import SkeletonButton from "./SkeletonButton";
 
 const LoginButtonsContainer = () => {
   const history = useHistory();
   const [insertUser] = useInsertUserMutation();
   const [getUser, { data, loading }] = useGetUserLazyQuery();
+  const { isAuthCheck } = useRecoilValue(renderState);
   const setUser = {
     id: useSetRecoilState(userId),
     email: useSetRecoilState(userEmail),
@@ -39,18 +43,7 @@ const LoginButtonsContainer = () => {
       setUser.email(email);
       setUser.searchEngine(search_engine);
     }
-  }, [id, setUser, userByPk, history]);
-
-  React.useEffect(() => {
-    firebase.auth().onAuthStateChanged((user) => {
-      const uid = user?.uid;
-      if (uid) {
-        getUser({
-          variables: { uid },
-        });
-      }
-    });
-  }, [getUser]);
+  }, [id, setUser, userByPk]);
 
   const onSignInGoogle = async () => {
     // provider is google
@@ -76,9 +69,7 @@ const LoginButtonsContainer = () => {
       }
 
       // signIn user
-      getUser({
-        variables: { uid },
-      });
+      getUser({ variables: { uid } });
       history.push(`/${id}`);
     } catch (error) {
       console.error(error);
@@ -92,18 +83,17 @@ const LoginButtonsContainer = () => {
     await firebase.auth().signOut();
   };
 
-  return (
-    <React.Fragment>
-      {id ? (
-        <LogoutButtonPresenter id={id} onSignOut={onSignOut} />
-      ) : (
-        <LoginButtonsPresenter
-          loading={loading}
-          onSignInGoogle={onSignInGoogle}
-        />
-      )}
-    </React.Fragment>
-  );
+  const LoginButton = () => {
+    if (id) return <LogoutButtonPresenter id={id} onSignOut={onSignOut} />;
+    return (
+      <LoginButtonsPresenter
+        loading={loading}
+        onSignInGoogle={onSignInGoogle}
+      />
+    );
+  };
+
+  return isAuthCheck ? <LoginButton /> : <SkeletonButton />;
 };
 
 export default LoginButtonsContainer;

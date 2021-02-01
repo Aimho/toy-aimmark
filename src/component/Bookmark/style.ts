@@ -58,15 +58,21 @@ export const MuiPaper = styled(Paper)`
   flex-direction: column;
   transition: background-color 0.3s;
   background-color: ${colorSet.backgroundLight};
+
   &:hover {
     background-color: ${colorSet.backgroundBase};
   }
 
   img {
+    opacity: 0.1;
     margin-bottom: 8px;
+    max-width: 32px;
+    max-height: 32px;
+    transition: opacity 0.5s;
     &.resize {
       width: 32px;
       height: 32px;
+      opacity: 1;
     }
   }
 `;

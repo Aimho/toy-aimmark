@@ -727,7 +727,7 @@ export type GetUserItemQuery = { __typename?: 'query_root', item: Array<{ __type
 export type GetAllItemQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetAllItemQuery = { __typename?: 'query_root', item: Array<{ __typename?: 'item', id: any, url: string, name: string, base_url: string }> };
+export type GetAllItemQuery = { __typename?: 'query_root', item: Array<{ __typename?: 'item', base_url: string, id: any, name: string, url: string }> };
 
 export type InsertItemMutationVariables = Exact<{
   url: Scalars['String'];
@@ -774,7 +774,10 @@ export type UpdateUserMutation = { __typename?: 'mutation_root', update_user?: M
 
 export const GetUserItemDocument = gql`
     query getUserItem($user_id: String!, $is_private: Boolean) {
-  item(where: {user_id: {_eq: $user_id}, is_private: {_eq: $is_private}}) {
+  item(
+    order_by: {name: asc}
+    where: {user_id: {_eq: $user_id}, is_private: {_eq: $is_private}}
+  ) {
     id
     url
     name
@@ -812,11 +815,11 @@ export type GetUserItemLazyQueryHookResult = ReturnType<typeof useGetUserItemLaz
 export type GetUserItemQueryResult = Apollo.QueryResult<GetUserItemQuery, GetUserItemQueryVariables>;
 export const GetAllItemDocument = gql`
     query getAllItem {
-  item(where: {is_private: {_eq: false}}) {
-    id
-    url
-    name
+  item(limit: 10, where: {is_private: {_eq: false}}) {
     base_url
+    id
+    name
+    url
   }
 }
     `;

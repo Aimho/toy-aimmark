@@ -4,6 +4,7 @@ import { useSnackbar } from "notistack";
 import { useParams } from "react-router-dom";
 
 import { userState } from "../../recoils/userState";
+import { renderState } from "../../recoils/renderState";
 
 import {
   useDeleteItemMutation,
@@ -15,10 +16,11 @@ function Detail() {
   const { id } = useParams() as any;
   const { enqueueSnackbar } = useSnackbar();
 
+  const { isAuthCheck } = useRecoilValue(renderState);
   const m_userState = useRecoilValue(userState);
   const isOwner = id === m_userState.id ? true : false;
 
-  const { data, refetch } = useGetUserItemQuery({
+  const { data, error, refetch } = useGetUserItemQuery({
     variables: { user_id: id, is_private: !isOwner ? false : null },
   });
 
@@ -43,8 +45,16 @@ function Detail() {
       .finally(refetch);
   };
 
+  if (error?.message) {
+    enqueueSnackbar(
+      `북마크 데이터를 불러오는데 실패하였습니다. 잠시 후 다시 시도해주세요`,
+      { variant: "error" }
+    );
+  }
+
   return (
     <DetailPresenter
+      isAuthCheck={isAuthCheck}
       isOwner={isOwner}
       refetch={refetch}
       onDelete={onDelete}

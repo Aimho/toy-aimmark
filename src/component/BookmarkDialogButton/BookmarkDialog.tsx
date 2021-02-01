@@ -7,7 +7,6 @@ import {
   DialogActions,
   DialogContent,
   TextField,
-  IconButton,
   Grid,
   FormControlLabel,
   Switch,
@@ -52,9 +51,14 @@ const BookmarkDialog = ({ onCloseCallBack }: Props) => {
 
   return (
     <React.Fragment>
-      <IconButton onClick={onOpenDialog} color="primary">
-        <Bookmark />
-      </IconButton>
+      <Button
+        variant="text"
+        color="primary"
+        startIcon={<Bookmark />}
+        onClick={onOpenDialog}
+      >
+        북마크 등록
+      </Button>
 
       <Dialog open={open} maxWidth="xs" fullWidth>
         <form onSubmit={handleSubmit(onSubmit)}>

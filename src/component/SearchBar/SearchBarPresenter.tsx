@@ -1,35 +1,40 @@
 import React from "react";
 import {
-  TextField,
   InputAdornment,
   MenuItem,
   CircularProgress,
   Grid,
+  TextField,
 } from "@material-ui/core";
 import { SearchRounded } from "@material-ui/icons";
+
 import { TSearchEngine } from "./type";
 import { MenuItemLoading, MuiSelect } from "./style";
+import { Skeleton } from "@material-ui/lab";
 
 interface Props {
   loading: boolean;
+  isAuthCheck: boolean;
   searchEngine: {
     value: TSearchEngine;
     favicon: (_: TSearchEngine) => React.ReactNode;
   };
   onChangeSearchEngine: (_: any) => void;
-  onSearch: (_: string) => void;
+  searchText: string;
+  onChangeSearchText: (_: string) => void;
+  onSearch: () => void;
 }
 
 const SearchBarPresenter = (props: Props) => {
-  const onKeyUp = (event: any) => {
-    if (event.key === "Enter") {
-      props.onSearch(event.target.value);
+  const onKeyUp = (e: any) => {
+    if (e.key === "Enter") {
+      props.onSearch();
     }
   };
 
   const StartAdornment = () => {
-    const onChange = (event: any) => {
-      props.onChangeSearchEngine(event.target.value);
+    const onChange = (e: any) => {
+      props.onChangeSearchEngine(e.target.value);
     };
 
     const selectMenu = (text: TSearchEngine) => {
@@ -51,6 +56,14 @@ const SearchBarPresenter = (props: Props) => {
         </MenuItem>
       );
     };
+
+    if (!props.isAuthCheck) {
+      return (
+        <InputAdornment position="start">
+          <Skeleton variant="rect" animation="wave" width={109} height={32} />
+        </InputAdornment>
+      );
+    }
 
     return (
       <InputAdornment position="start">
@@ -75,10 +88,18 @@ const SearchBarPresenter = (props: Props) => {
     </InputAdornment>
   );
 
+  const onChangeSearchText = (e: any) => {
+    const text = e.target.value;
+    props.onChangeSearchText(text);
+  };
+
   return (
     <TextField
       fullWidth
+      variant="outlined"
       onKeyUp={onKeyUp}
+      onChange={onChangeSearchText}
+      value={props.searchText}
       InputProps={{
         startAdornment: StartAdornment(),
         endAdornment: EndAdornment(),

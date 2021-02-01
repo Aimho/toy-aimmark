@@ -1,5 +1,6 @@
 query getUserItem($user_id: String!, $is_private: Boolean) {
   item(
+    order_by: { name: asc }
     where: { user_id: { _eq: $user_id }, is_private: { _eq: $is_private } }
   ) {
     id
@@ -11,11 +12,11 @@ query getUserItem($user_id: String!, $is_private: Boolean) {
 }
 
 query getAllItem {
-  item(where: { is_private: { _eq: false } }) {
-    id
-    url
-    name
+  item(limit: 10, where: { is_private: { _eq: false } }) {
     base_url
+    id
+    name
+    url
   }
 }
 

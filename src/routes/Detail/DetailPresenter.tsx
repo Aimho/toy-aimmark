@@ -2,17 +2,14 @@ import React from "react";
 import { Container } from "@material-ui/core";
 
 import Bookmark from "../../component/Bookmark";
-import SearchBar from "../../component/SearchBar";
 import { TBookmarkItem } from "../../component/Bookmark/type";
 import BookmarkDialogButton from "../../component/BookmarkDialogButton";
-import {
-  StyledDetail,
-  StyledDetailHeader,
-  StyledDetailContentAction,
-} from "./style";
+import { Actions } from "./style";
+import SkeletonBookmark from "../../component/Bookmark/SkeletonBookmark";
 
 interface Props {
   isOwner: boolean;
+  isAuthCheck: boolean;
   refetch: () => void;
   onDelete: (name: string, id: string) => void;
   deleteLoading: boolean;
@@ -21,30 +18,33 @@ interface Props {
 
 function DetailPresenter({
   isOwner,
+  isAuthCheck,
   refetch,
   onDelete,
   deleteLoading,
   items,
 }: Props) {
+  const Content = () => {
+    if (!isAuthCheck) {
+      return <SkeletonBookmark items={items} />;
+    }
+    return (
+      <Bookmark
+        isOwner={isOwner}
+        onDelete={onDelete}
+        loading={deleteLoading}
+        items={items}
+      />
+    );
+  };
   return (
-    <StyledDetail>
-      <Container maxWidth="md">
-        <StyledDetailHeader>
-          <SearchBar />
-        </StyledDetailHeader>
+    <Container maxWidth="md">
+      <Actions>
+        <BookmarkDialogButton isOwner={isOwner} refetch={refetch} />
+      </Actions>
 
-        <StyledDetailContentAction>
-          <BookmarkDialogButton isOwner={isOwner} refetch={refetch} />
-        </StyledDetailContentAction>
-
-        <Bookmark
-          isOwner={isOwner}
-          onDelete={onDelete}
-          loading={deleteLoading}
-          items={items}
-        />
-      </Container>
-    </StyledDetail>
+      <Content />
+    </Container>
   );
 }
 
