@@ -16,8 +16,8 @@ function Detail() {
   const { id } = useParams() as any;
   const { enqueueSnackbar } = useSnackbar();
 
-  const { isAuthCheck } = useRecoilValue(renderState);
   const m_userState = useRecoilValue(userState);
+  const { isAuthCheck } = useRecoilValue(renderState);
   const isOwner = id === m_userState.id ? true : false;
 
   const { data, error, refetch } = useGetUserItemQuery({

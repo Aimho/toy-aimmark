@@ -25,17 +25,17 @@ function DetailPresenter({
   items,
 }: Props) {
   const Content = () => {
-    if (!isAuthCheck) {
-      return <SkeletonBookmark items={items} />;
+    if (isAuthCheck) {
+      return (
+        <Bookmark
+          isOwner={isOwner}
+          onDelete={onDelete}
+          loading={deleteLoading}
+          items={items}
+        />
+      );
     }
-    return (
-      <Bookmark
-        isOwner={isOwner}
-        onDelete={onDelete}
-        loading={deleteLoading}
-        items={items}
-      />
-    );
+    return <SkeletonBookmark items={items} />;
   };
   return (
     <Container maxWidth="md">

@@ -21,12 +21,10 @@ export const userState = selector({
   get: ({ get }) => {
     const id = get(userId);
     const email = get(userEmail);
-    const searchEngine = get(userSearchEngine);
 
     return {
       id,
       email,
-      searchEngine,
     };
   },
 });
