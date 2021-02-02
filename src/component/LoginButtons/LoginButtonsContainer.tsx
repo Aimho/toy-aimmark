@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
 import "firebase/auth";
@@ -6,7 +6,12 @@ import firebase from "firebase/app";
 
 import { useSetRecoilState, useRecoilValue } from "recoil";
 import { renderState } from "../../recoils/renderState";
-import { userId, userEmail, userSearchEngine } from "../../recoils/userState";
+import {
+  userId,
+  userEmail,
+  userSearchEngine,
+  userState,
+} from "../../recoils/userState";
 
 import LoginButtonsPresenter from "./LoginButtonsPresenter";
 import {
@@ -22,6 +27,7 @@ const LoginButtonsContainer = () => {
   const [insertUser] = useInsertUserMutation();
   const [getUser, { data, loading }] = useGetUserLazyQuery();
   const { isAuthCheck } = useRecoilValue(renderState);
+  const { id: m_userId } = useRecoilValue(userState);
   const setUser = {
     id: useSetRecoilState(userId),
     email: useSetRecoilState(userEmail),
@@ -31,7 +37,7 @@ const LoginButtonsContainer = () => {
   const userByPk = data?.user_by_pk;
   const id = userByPk?.id;
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!userByPk) return;
 
     const email = userByPk.email;
@@ -84,7 +90,8 @@ const LoginButtonsContainer = () => {
   };
 
   const LoginButton = () => {
-    if (id) return <LogoutButtonPresenter id={id} onSignOut={onSignOut} />;
+    if (m_userId)
+      return <LogoutButtonPresenter id={m_userId} onSignOut={onSignOut} />;
     return (
       <LoginButtonsPresenter
         loading={loading}
