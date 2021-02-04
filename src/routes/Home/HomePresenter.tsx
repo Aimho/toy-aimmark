@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Grid, Typography } from "@material-ui/core";
+import { Button, Container, Grid, Typography } from "@material-ui/core";
 
 import Bookmark from "../../component/Bookmark";
 import { TBookmarkItem } from "../../component/Bookmark/type";
@@ -15,9 +15,8 @@ function HomePresenter({ items }: Props) {
         <Grid item xs={12} sm={6}>
           <Typography
             variant="h4"
-            align="left"
             gutterBottom
-            style={{ marginTop: 24, lineHeight: 2 }}
+            style={{ marginTop: 24, lineHeight: 1.8 }}
           >
             손쉽게
             <br />
@@ -27,6 +26,15 @@ function HomePresenter({ items }: Props) {
             를 만들고 <br />
             공유해보세요!
           </Typography>
+
+          <Button
+            variant="contained"
+            href="https://aimho.github.io/toy-aimmark/"
+            target="_blank"
+            color="primary"
+          >
+            AimMark 소개
+          </Button>
         </Grid>
         <Grid item xs={12} sm={6}>
           <Bookmark items={items} />

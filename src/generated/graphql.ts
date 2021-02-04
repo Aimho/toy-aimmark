@@ -843,7 +843,7 @@ export type GetUserItemLazyQueryHookResult = ReturnType<typeof useGetUserItemLaz
 export type GetUserItemQueryResult = Apollo.QueryResult<GetUserItemQuery, GetUserItemQueryVariables>;
 export const GetAllItemDocument = gql`
     query getAllItem {
-  item(limit: 10, order_by: {created_at: desc}, where: {is_private: {_eq: false}}) {
+  item(limit: 20, order_by: {created_at: desc}, where: {is_private: {_eq: false}}) {
     base_url
     id
     name
