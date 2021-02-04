@@ -1,45 +1,45 @@
-import reset from 'styled-reset';
-import { createGlobalStyle } from 'styled-components';
+import reset from "styled-reset";
+import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
     font-family: NotoSans;
     font-weight: 400;
-    src: url(${require('./fonts/NotoSans-Regular.woff2')}) format("woff2"),
-      url(${require('./fonts/NotoSans-Regular.woff')}) format("woff"),
-      url(${require('./fonts/NotoSans-Regular.otf')}) format("truetype");
+    src: url(${require("./fonts/NotoSans-Regular.woff2")}) format("woff2"),
+      url(${require("./fonts/NotoSans-Regular.woff")}) format("woff"),
+      url(${require("./fonts/NotoSans-Regular.otf")}) format("truetype");
   }
   @font-face {
     font-family: NotoSans;
     font-weight: 500;
-    src: url(${require('./fonts/NotoSans-Medium.woff2')}) format("woff2"),
-      url(${require('./fonts/NotoSans-Medium.woff')}) format("woff"),
-      url(${require('./fonts/NotoSans-Medium.otf')}) format("truetype");
+    src: url(${require("./fonts/NotoSans-Medium.woff2")}) format("woff2"),
+      url(${require("./fonts/NotoSans-Medium.woff")}) format("woff"),
+      url(${require("./fonts/NotoSans-Medium.otf")}) format("truetype");
   }
   @font-face {
     font-family: NotoSans;
     font-weight: 700;
-    src: url(${require('./fonts/NotoSans-Bold.woff2')}) format("woff2"),
-      url(${require('./fonts/NotoSans-Bold.woff')}) format("woff"),
-      url(${require('./fonts/NotoSans-Bold.otf')}) format("truetype");
+    src: url(${require("./fonts/NotoSans-Bold.woff2")}) format("woff2"),
+      url(${require("./fonts/NotoSans-Bold.woff")}) format("woff"),
+      url(${require("./fonts/NotoSans-Bold.otf")}) format("truetype");
   }
   @font-face {
     font-family: Roboto;
     font-weight: 400;
-    src: url(${require('./fonts/Roboto-Regular-webfont.woff')}) format("woff"),
-      url(${require('./fonts/Roboto-Regular-webfont.ttf')}) format("truetype");
+    src: url(${require("./fonts/Roboto-Regular-webfont.woff")}) format("woff"),
+      url(${require("./fonts/Roboto-Regular-webfont.ttf")}) format("truetype");
   }
   @font-face {
     font-family: Roboto;
     font-weight: 500;
-    src: url(${require('./fonts/Roboto-Medium-webfont.woff')}) format("woff"),
-      url(${require('./fonts/Roboto-Medium-webfont.ttf')}) format("truetype");
+    src: url(${require("./fonts/Roboto-Medium-webfont.woff")}) format("woff"),
+      url(${require("./fonts/Roboto-Medium-webfont.ttf")}) format("truetype");
   }
   @font-face {
     font-family: Roboto;
     font-weight: 700;
-    src: url(${require('./fonts/Roboto-Bold-webfont.woff')}) format("woff"),
-      url(${require('./fonts/Roboto-Bold-webfont.ttf')}) format("truetype");
+    src: url(${require("./fonts/Roboto-Bold-webfont.woff")}) format("woff"),
+      url(${require("./fonts/Roboto-Bold-webfont.ttf")}) format("truetype");
   }
 
 

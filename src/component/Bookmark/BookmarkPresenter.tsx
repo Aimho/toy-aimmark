@@ -34,7 +34,9 @@ const BookmarkPresenter = (props: Props) => (
         const onDelete = (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
           e.preventDefault();
           e.stopPropagation();
-          props.onDelete!(item.name, item.id);
+          if (window.confirm(`${item.name} 북마크를 삭제하시겠습니까?`)) {
+            props.onDelete!(item.name, item.id);
+          }
         };
 
         if (props.loading) return <MuiCircleProgress size={16} />;

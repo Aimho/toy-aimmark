@@ -13,6 +13,7 @@ import {
 import DetailPresenter from "./DetailPresenter";
 
 function Detail() {
+  const { href } = window.location;
   const { id } = useParams() as any;
   const { enqueueSnackbar } = useSnackbar();
 
@@ -51,15 +52,23 @@ function Detail() {
       { variant: "error" }
     );
   }
+  const onCopy = () => {
+    enqueueSnackbar(`북마크 주소가 복사되었습니다.`, {
+      variant: "info",
+    });
+  };
 
   return (
     <DetailPresenter
       isAuthCheck={isAuthCheck}
       isOwner={isOwner}
-      refetch={refetch}
-      onDelete={onDelete}
-      deleteLoading={deleteItemState.loading}
-      items={data?.item}
+      addProps={{ refetch }}
+      bookmarkProps={{
+        items: data?.item,
+        onDelete,
+        deleteLoading: deleteItemState.loading,
+      }}
+      copyProps={{ href: href, onCopy }}
     />
   );
 }

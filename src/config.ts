@@ -14,12 +14,16 @@ const Config = () => {
     secret: process.env.REACT_APP_GRAPHQL_SECRET,
   };
 
+  const version = process.env.REACT_APP_VERSION;
+
   return {
     // firebase
     firebase,
 
     // Hasura
     hasura,
+
+    version,
   };
 };
 

@@ -2,9 +2,12 @@ import { TSearchEngine } from "./component/SearchBar/type";
 
 export const faviconImgProps = (baseUrl: string) => ({
   src: `https://www.google.com/s2/favicons?sz=64&domain_url=${baseUrl}`,
-  // src: `${baseUrl}/favicon.ico`,
   onError: (e: any) => {
-    e.target.src = `${baseUrl}/favicon.ico`;
+    if (e.target.src.indexOf("favicon.ico") === -1) {
+      return (e.target.src = `${baseUrl}/favicon.ico`);
+    } else {
+      return (e.target.src = require(`./styles/images/baseline_link_black_36dp.png`));
+    }
   },
   onLoadCapture: (e: any) => {
     if (e.target.offsetWidth === 16) {

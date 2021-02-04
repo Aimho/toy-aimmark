@@ -17,7 +17,7 @@ function HomePresenter({ items }: Props) {
             variant="h4"
             align="left"
             gutterBottom
-            style={{ marginTop: 24 }}
+            style={{ marginTop: 24, lineHeight: 2 }}
           >
             손쉽게
             <br />

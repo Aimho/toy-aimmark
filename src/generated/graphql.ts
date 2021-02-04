@@ -9,6 +9,7 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  date: any;
   uuid: any;
 };
 
@@ -44,10 +45,25 @@ export type String_Comparison_Exp = {
   _similar?: Maybe<Scalars['String']>;
 };
 
+
+/** expression to compare columns of type date. All fields are combined with logical 'AND'. */
+export type Date_Comparison_Exp = {
+  _eq?: Maybe<Scalars['date']>;
+  _gt?: Maybe<Scalars['date']>;
+  _gte?: Maybe<Scalars['date']>;
+  _in?: Maybe<Array<Scalars['date']>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _lt?: Maybe<Scalars['date']>;
+  _lte?: Maybe<Scalars['date']>;
+  _neq?: Maybe<Scalars['date']>;
+  _nin?: Maybe<Array<Scalars['date']>>;
+};
+
 /** columns and relationships of "item" */
 export type Item = {
   __typename?: 'item';
   base_url: Scalars['String'];
+  created_at: Scalars['date'];
   id: Scalars['uuid'];
   is_private: Scalars['Boolean'];
   name: Scalars['String'];
@@ -96,6 +112,7 @@ export type Item_Bool_Exp = {
   _not?: Maybe<Item_Bool_Exp>;
   _or?: Maybe<Array<Maybe<Item_Bool_Exp>>>;
   base_url?: Maybe<String_Comparison_Exp>;
+  created_at?: Maybe<Date_Comparison_Exp>;
   id?: Maybe<Uuid_Comparison_Exp>;
   is_private?: Maybe<Boolean_Comparison_Exp>;
   name?: Maybe<String_Comparison_Exp>;
@@ -112,6 +129,7 @@ export enum Item_Constraint {
 /** input type for inserting data into table "item" */
 export type Item_Insert_Input = {
   base_url?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['date']>;
   id?: Maybe<Scalars['uuid']>;
   is_private?: Maybe<Scalars['Boolean']>;
   name?: Maybe<Scalars['String']>;
@@ -123,6 +141,7 @@ export type Item_Insert_Input = {
 export type Item_Max_Fields = {
   __typename?: 'item_max_fields';
   base_url?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['date']>;
   id?: Maybe<Scalars['uuid']>;
   name?: Maybe<Scalars['String']>;
   url?: Maybe<Scalars['String']>;
@@ -132,6 +151,7 @@ export type Item_Max_Fields = {
 /** order by max() on columns of table "item" */
 export type Item_Max_Order_By = {
   base_url?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
   url?: Maybe<Order_By>;
@@ -142,6 +162,7 @@ export type Item_Max_Order_By = {
 export type Item_Min_Fields = {
   __typename?: 'item_min_fields';
   base_url?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['date']>;
   id?: Maybe<Scalars['uuid']>;
   name?: Maybe<Scalars['String']>;
   url?: Maybe<Scalars['String']>;
@@ -151,6 +172,7 @@ export type Item_Min_Fields = {
 /** order by min() on columns of table "item" */
 export type Item_Min_Order_By = {
   base_url?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
   url?: Maybe<Order_By>;
@@ -182,6 +204,7 @@ export type Item_On_Conflict = {
 /** ordering options when selecting data from "item" */
 export type Item_Order_By = {
   base_url?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   is_private?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
@@ -199,6 +222,8 @@ export enum Item_Select_Column {
   /** column name */
   BaseUrl = 'base_url',
   /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
   Id = 'id',
   /** column name */
   IsPrivate = 'is_private',
@@ -213,6 +238,7 @@ export enum Item_Select_Column {
 /** input type for updating data in table "item" */
 export type Item_Set_Input = {
   base_url?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['date']>;
   id?: Maybe<Scalars['uuid']>;
   is_private?: Maybe<Scalars['Boolean']>;
   name?: Maybe<Scalars['String']>;
@@ -224,6 +250,8 @@ export type Item_Set_Input = {
 export enum Item_Update_Column {
   /** column name */
   BaseUrl = 'base_url',
+  /** column name */
+  CreatedAt = 'created_at',
   /** column name */
   Id = 'id',
   /** column name */
@@ -815,7 +843,7 @@ export type GetUserItemLazyQueryHookResult = ReturnType<typeof useGetUserItemLaz
 export type GetUserItemQueryResult = Apollo.QueryResult<GetUserItemQuery, GetUserItemQueryVariables>;
 export const GetAllItemDocument = gql`
     query getAllItem {
-  item(limit: 10, where: {is_private: {_eq: false}}) {
+  item(limit: 10, order_by: {created_at: desc}, where: {is_private: {_eq: false}}) {
     base_url
     id
     name

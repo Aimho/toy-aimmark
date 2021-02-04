@@ -8,6 +8,7 @@ export const useAppBarStyles = makeStyles(() =>
     title: {
       flexGrow: 1,
       display: "block",
+      marginRight: 8,
     },
   })
 );

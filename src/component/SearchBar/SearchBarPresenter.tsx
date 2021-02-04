@@ -5,6 +5,7 @@ import {
   CircularProgress,
   Grid,
   TextField,
+  IconButton,
 } from "@material-ui/core";
 import { SearchRounded } from "@material-ui/icons";
 
@@ -60,7 +61,25 @@ const SearchBarPresenter = (props: Props) => {
     if (!props.isAuthCheck) {
       return (
         <InputAdornment position="start">
-          <Skeleton variant="rect" animation="wave" width={109} height={32} />
+          <Grid container spacing={1} wrap="nowrap" alignItems="center">
+            <Grid item>
+              <Skeleton
+                variant="circle"
+                animation="wave"
+                width={12}
+                height={12}
+                style={{ marginTop: 2 }}
+              />
+            </Grid>
+            <Grid item>
+              <Skeleton
+                variant="text"
+                animation="wave"
+                width={58}
+                height={30}
+              />
+            </Grid>
+          </Grid>
         </InputAdornment>
       );
     }
@@ -84,7 +103,9 @@ const SearchBarPresenter = (props: Props) => {
 
   const EndAdornment = () => (
     <InputAdornment position="end">
-      <SearchRounded />
+      <IconButton size="small" onClick={props.onSearch}>
+        <SearchRounded />
+      </IconButton>
     </InputAdornment>
   );
 
@@ -98,8 +119,9 @@ const SearchBarPresenter = (props: Props) => {
       fullWidth
       variant="outlined"
       onKeyUp={onKeyUp}
-      onChange={onChangeSearchText}
+      placeholder="검색어 입력 후 엔터 또는 아이콘 클릭"
       value={props.searchText}
+      onChange={onChangeSearchText}
       InputProps={{
         startAdornment: StartAdornment(),
         endAdornment: EndAdornment(),

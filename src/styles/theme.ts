@@ -24,6 +24,11 @@ const theme = createMuiTheme({
       disabled: colorSet.gray300,
     },
   },
+  typography: {
+    button: {
+      textTransform: "none",
+    },
+  },
 });
 
 export default theme;

@@ -39,7 +39,10 @@ const SearchBarContainer = () => {
     );
   };
 
-  const onSearch = () => openUrl(`${getSearchUrl(searchEngine)}${searchText}`);
+  const onSearch = () => {
+    openUrl(`${getSearchUrl(searchEngine)}${searchText}`);
+    setSearchText("");
+  };
 
   return (
     <SearchBarPresenter
