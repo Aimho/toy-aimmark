@@ -6,7 +6,6 @@ import {
   MuiCircleProgress,
   MuiClose,
   MuiPaper,
-  MuiPrivate,
 } from "./style";
 import { TBookmarkItem } from "./type";
 import { faviconImgProps, getBaseUrl, openUrl } from "../../utils";
@@ -22,11 +21,6 @@ const BookmarkPresenter = (props: Props) => (
   <Grid container spacing={2}>
     {props.items?.map((item, index) => {
       const baseUrl = item.base_url ? item.base_url : getBaseUrl(item.url);
-
-      const PrivateIcon = () => {
-        if (!item.is_private) return null;
-        return <MuiPrivate />;
-      };
 
       const DeleteButton = () => {
         if (!props.isOwner) return null;
@@ -57,7 +51,6 @@ const BookmarkPresenter = (props: Props) => (
             <MuiPaper>
               <DeleteButton />
               <FaviconContainer>
-                <PrivateIcon />
                 <img alt={item.name} {...faviconImgProps(baseUrl)} />
               </FaviconContainer>
               <Typography variant="caption">{item.name}</Typography>

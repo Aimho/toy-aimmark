@@ -1,26 +1,9 @@
-query getUserItem($user_id: String!, $is_private: Boolean) {
-  item(
-    order_by: { name: asc }
-    where: { user_id: { _eq: $user_id }, is_private: { _eq: $is_private } }
-  ) {
+query getUserItem($user_id: String!) {
+  item(order_by: { name: asc }, where: { user_id: { _eq: $user_id } }) {
     id
     url
     name
     base_url
-    is_private
-  }
-}
-
-query getAllItem {
-  item(
-    limit: 20
-    order_by: { created_at: desc }
-    where: { is_private: { _eq: false } }
-  ) {
-    base_url
-    id
-    name
-    url
   }
 }
 
@@ -29,16 +12,9 @@ mutation insertItem(
   $base_url: String!
   $name: String!
   $user_id: String!
-  $is_private: Boolean!
 ) {
   insert_item_one(
-    object: {
-      url: $url
-      base_url: $base_url
-      name: $name
-      user_id: $user_id
-      is_private: $is_private
-    }
+    object: { url: $url, base_url: $base_url, name: $name, user_id: $user_id }
   ) {
     id
   }

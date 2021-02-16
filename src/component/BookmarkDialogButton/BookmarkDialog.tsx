@@ -33,7 +33,7 @@ const BookmarkDialog = ({ onCloseCallBack }: Props) => {
   const onCloseDialog = () => setOpen(false);
 
   const onSubmit = async (data: any) => {
-    const { url, name, is_private } = data;
+    const { url, name } = data;
     if (!id) {
       console.error("user id is null");
       return;
@@ -42,7 +42,7 @@ const BookmarkDialog = ({ onCloseCallBack }: Props) => {
     const base_url = new URL(url).origin;
 
     insertItem({
-      variables: { url, base_url, name, user_id: id, is_private },
+      variables: { url, base_url, name, user_id: id },
     }).then(() => {
       onCloseDialog();
       onCloseCallBack();

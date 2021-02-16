@@ -4,7 +4,7 @@ import { useSnackbar } from "notistack";
 import { useParams } from "react-router-dom";
 
 import { userState } from "../../recoils/userState";
-import { renderState } from "../../recoils/renderState";
+import { initRender } from "../../recoils/renderState";
 
 import {
   useDeleteItemMutation,
@@ -18,11 +18,11 @@ function Detail() {
   const { enqueueSnackbar } = useSnackbar();
 
   const m_userState = useRecoilValue(userState);
-  const { isAuthCheck } = useRecoilValue(renderState);
+  const isAuthCheck = useRecoilValue(initRender);
   const isOwner = id === m_userState.id ? true : false;
 
   const { data, error, refetch } = useGetUserItemQuery({
-    variables: { user_id: id, is_private: !isOwner ? false : null },
+    variables: { user_id: id },
   });
 
   useEffect(() => {
@@ -68,7 +68,6 @@ function Detail() {
         onDelete,
         deleteLoading: deleteItemState.loading,
       }}
-      copyProps={{ href: href, onCopy }}
     />
   );
 }

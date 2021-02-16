@@ -16,6 +16,15 @@ export const userSearchEngine = atom({
   default: "google" as TSearchEngine,
 });
 
+export const userProfile = atom({
+  key: "userProfile",
+  default: {
+    id: "",
+    email: "",
+    photoUrl: "",
+  },
+});
+
 export const userState = selector({
   key: "userState",
   get: ({ get }) => {

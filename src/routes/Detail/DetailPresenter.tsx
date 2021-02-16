@@ -19,10 +19,6 @@ interface Props {
     deleteLoading: boolean;
     onDelete: (name: string, id: string) => void;
   };
-  copyProps: {
-    href: string;
-    onCopy: () => void;
-  };
 }
 
 function DetailPresenter({
@@ -30,7 +26,6 @@ function DetailPresenter({
   isAuthCheck,
   addProps,
   bookmarkProps,
-  copyProps,
 }: Props) {
   const Content = () => {
     if (!isAuthCheck) {
@@ -46,22 +41,11 @@ function DetailPresenter({
     return <Bookmark {...bookmarkProps} isOwner={isOwner} />;
   };
 
-  const CopyBookmarkButton = () => (
-    <CopyToClipboard text={copyProps.href} onCopy={copyProps.onCopy}>
-      <Button variant="text" startIcon={<FileCopy />}>
-        북마크 공유
-      </Button>
-    </CopyToClipboard>
-  );
-
   return (
     <Container maxWidth="md">
       <Grid container justify="flex-end" alignItems="center" spacing={1}>
         <Grid item>
           <BookmarkDialogButton isOwner={isOwner} refetch={addProps.refetch} />
-        </Grid>
-        <Grid item>
-          <CopyBookmarkButton />
         </Grid>
       </Grid>
 

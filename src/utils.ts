@@ -1,3 +1,6 @@
+import "firebase/auth";
+import firebase from "firebase/app";
+
 import { TSearchEngine } from "./component/SearchBar/type";
 
 export const faviconImgProps = (baseUrl: string) => ({
@@ -37,5 +40,32 @@ export const getSearchUrl = (search_engine: TSearchEngine) => {
     // youtube
     default:
       return "https://www.youtube.com/results?search_query=";
+  }
+};
+
+export const onSignInGoogle = async () => {
+  // provider is google
+  const provider = new firebase.auth.GoogleAuthProvider();
+
+  try {
+    const firebaseAuth = await firebase.auth().signInWithPopup(provider);
+    if (!firebaseAuth.additionalUserInfo) {
+      // eslint-disable-next-line
+      throw "firebase additionalUserInfo is null";
+    }
+
+    // firebase data extract
+    const { profile, isNewUser } = firebaseAuth.additionalUserInfo;
+    const { uid } = firebaseAuth.user!;
+    const { id, email, picture } = profile as any;
+
+    return {
+      uid,
+      profile: { id, email, photoUrl: picture },
+      isNewUser,
+    };
+  } catch (error) {
+    console.error(error);
+    return undefined;
   }
 };

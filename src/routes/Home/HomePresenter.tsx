@@ -1,46 +1,77 @@
-import React from "react";
-import { Button, Container, Grid, Typography } from "@material-ui/core";
+import React, { useState } from "react";
+import {
+  Button,
+  CircularProgress,
+  Container,
+  Fade,
+  Grid,
+} from "@material-ui/core";
+import { Add } from "@material-ui/icons";
 
-import Bookmark from "../../component/Bookmark";
-import { TBookmarkItem } from "../../component/Bookmark/type";
+import { IBookmarkInput } from "../../component/Bookmark/type";
+import { CardButton } from "../../styles/customStyles";
+import { Title } from "./style";
 
 interface Props {
-  items?: TBookmarkItem;
+  isIn: boolean;
+  onSignIn: () => void;
+  onStart: (item: IBookmarkInput) => void;
 }
 
-function HomePresenter({ items }: Props) {
-  return (
-    <Container maxWidth="md">
-      <Grid container justify="space-between" spacing={3}>
-        <Grid item xs={12} sm={6}>
-          <Typography
-            variant="h4"
-            gutterBottom
-            style={{ marginTop: 24, lineHeight: 1.8 }}
-          >
-            손쉽게
-            <br />
-            <Typography color="primary" variant="h3" component="span">
-              북마크
-            </Typography>
-            를 만들고 <br />
-            공유해보세요!
-          </Typography>
+function HomePresenter({ isIn, onSignIn, onStart }: Props) {
+  const [selected, setSelected] = useState(-1);
+  const firstItems = [
+    { name: "네이버", url: "https://www.naver.com/" },
+    { name: "구글", url: "https://www.google.com/" },
+    { name: "유투브", url: "https://www.youtube.com/" },
+  ];
+  const disabledItem = (index: number) => {
+    if (selected === -1) return false;
+    return selected !== index ? true : false;
+  };
+  const onClickItem = (item: IBookmarkInput, index: number) => {
+    onStart(item);
+    setSelected(index);
+  };
 
-          <Button
-            variant="contained"
-            href="https://aimho.github.io/toy-aimmark/"
-            target="_blank"
-            color="primary"
-          >
-            AimMark 소개
-          </Button>
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <Bookmark items={items} />
-        </Grid>
-      </Grid>
-    </Container>
+  return (
+    <React.Fragment>
+      <Fade in={isIn}>
+        <Container component="header" style={{ margin: "12px auto" }}>
+          <Grid container justify="flex-end">
+            <Grid item>
+              <Button variant="text" onClick={onSignIn}>
+                <p>이미 북마크가 있다면?</p>
+              </Button>
+            </Grid>
+          </Grid>
+        </Container>
+      </Fade>
+
+      <Fade in={isIn}>
+        <Container component="main" style={{ margin: "48px auto" }}>
+          <Title>내 북마크를 만들어보세요</Title>
+          <Grid container justify="space-between" spacing={3}>
+            {firstItems.map((item, index) => (
+              <Grid item key={index}>
+                <CardButton
+                  disabled={disabledItem(index)}
+                  onClick={() => onClickItem(item, index)}
+                >
+                  <p>{item.name}</p>
+
+                  {selected === index ? (
+                    <CircularProgress size={75} color="primary" />
+                  ) : (
+                    <Add color="primary" fontSize="inherit" />
+                  )}
+                </CardButton>
+              </Grid>
+            ))}
+          </Grid>
+        </Container>
+      </Fade>
+    </React.Fragment>
   );
 }
 

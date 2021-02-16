@@ -62,6 +62,7 @@ const GlobalStyle = createGlobalStyle`
   select, textarea {
     font-family: NotoSans, Roboto, sans-serif;
     word-break: break-all;
+    color: #7878AB;
   }
   a {
       color: inherit;
@@ -69,6 +70,9 @@ const GlobalStyle = createGlobalStyle`
   }
   input,
   button {
+      border: 0px;
+      opacity: 1;
+      transition: opacity 0.3s;
       &:focus,
       &:active{ outline: none }
   }

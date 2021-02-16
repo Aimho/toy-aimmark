@@ -10,12 +10,15 @@ import { ApolloProvider } from "@apollo/react-hooks";
 import App from "./component/App";
 import config from "./config";
 import client from "./apollo";
+import ThemeProvider from "./styles/ThemeProvider";
 
 firebase.initializeApp(config.firebase);
 
 ReactDOM.render(
   <ApolloProvider client={client as any}>
-    <App />
+    <ThemeProvider>
+      <App />
+    </ThemeProvider>
   </ApolloProvider>,
   document.getElementById("root")
 );

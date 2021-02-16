@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { useUpdateUserMutation } from "../../generated/graphql";
-import { renderState } from "../../recoils/renderState";
+import { initRender } from "../../recoils/renderState";
 import { userSearchEngine, userId } from "../../recoils/userState";
 import {
   faviconImgProps,
@@ -16,7 +16,7 @@ import { TSearchEngine } from "./type";
 const SearchBarContainer = () => {
   const [searchText, setSearchText] = useState("");
   const [updateUser, { loading }] = useUpdateUserMutation();
-  const { isAuthCheck } = useRecoilValue(renderState);
+  const isInit = useRecoilValue(initRender);
   const id = useRecoilValue(userId);
   const searchEngine = useRecoilValue(userSearchEngine);
   const setUserSearchEngine = useSetRecoilState(userSearchEngine);
@@ -47,7 +47,7 @@ const SearchBarContainer = () => {
   return (
     <SearchBarPresenter
       loading={loading}
-      isAuthCheck={isAuthCheck}
+      isAuthCheck={isInit}
       searchEngine={{
         favicon: favicon,
         value: searchEngine,

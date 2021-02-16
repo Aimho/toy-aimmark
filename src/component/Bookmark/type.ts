@@ -6,5 +6,9 @@ export type TBookmarkItem = Array<{
   url: string;
   name: string;
   base_url?: Maybe<string>;
-  is_private?: Maybe<boolean>;
 }>;
+
+export interface IBookmarkInput {
+  name: string;
+  url: string;
+}
