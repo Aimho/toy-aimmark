@@ -13,19 +13,6 @@ export type Scalars = {
   uuid: any;
 };
 
-/** expression to compare columns of type Boolean. All fields are combined with logical 'AND'. */
-export type Boolean_Comparison_Exp = {
-  _eq?: Maybe<Scalars['Boolean']>;
-  _gt?: Maybe<Scalars['Boolean']>;
-  _gte?: Maybe<Scalars['Boolean']>;
-  _in?: Maybe<Array<Scalars['Boolean']>>;
-  _is_null?: Maybe<Scalars['Boolean']>;
-  _lt?: Maybe<Scalars['Boolean']>;
-  _lte?: Maybe<Scalars['Boolean']>;
-  _neq?: Maybe<Scalars['Boolean']>;
-  _nin?: Maybe<Array<Scalars['Boolean']>>;
-};
-
 /** expression to compare columns of type String. All fields are combined with logical 'AND'. */
 export type String_Comparison_Exp = {
   _eq?: Maybe<Scalars['String']>;
@@ -65,7 +52,6 @@ export type Item = {
   base_url: Scalars['String'];
   created_at: Scalars['date'];
   id: Scalars['uuid'];
-  is_private: Scalars['Boolean'];
   name: Scalars['String'];
   url: Scalars['String'];
   user_id?: Maybe<Scalars['String']>;
@@ -114,7 +100,6 @@ export type Item_Bool_Exp = {
   base_url?: Maybe<String_Comparison_Exp>;
   created_at?: Maybe<Date_Comparison_Exp>;
   id?: Maybe<Uuid_Comparison_Exp>;
-  is_private?: Maybe<Boolean_Comparison_Exp>;
   name?: Maybe<String_Comparison_Exp>;
   url?: Maybe<String_Comparison_Exp>;
   user_id?: Maybe<String_Comparison_Exp>;
@@ -131,7 +116,6 @@ export type Item_Insert_Input = {
   base_url?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['date']>;
   id?: Maybe<Scalars['uuid']>;
-  is_private?: Maybe<Scalars['Boolean']>;
   name?: Maybe<Scalars['String']>;
   url?: Maybe<Scalars['String']>;
   user_id?: Maybe<Scalars['String']>;
@@ -206,7 +190,6 @@ export type Item_Order_By = {
   base_url?: Maybe<Order_By>;
   created_at?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
-  is_private?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
   url?: Maybe<Order_By>;
   user_id?: Maybe<Order_By>;
@@ -226,8 +209,6 @@ export enum Item_Select_Column {
   /** column name */
   Id = 'id',
   /** column name */
-  IsPrivate = 'is_private',
-  /** column name */
   Name = 'name',
   /** column name */
   Url = 'url',
@@ -240,7 +221,6 @@ export type Item_Set_Input = {
   base_url?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['date']>;
   id?: Maybe<Scalars['uuid']>;
-  is_private?: Maybe<Scalars['Boolean']>;
   name?: Maybe<Scalars['String']>;
   url?: Maybe<Scalars['String']>;
   user_id?: Maybe<Scalars['String']>;
@@ -254,8 +234,6 @@ export enum Item_Update_Column {
   CreatedAt = 'created_at',
   /** column name */
   Id = 'id',
-  /** column name */
-  IsPrivate = 'is_private',
   /** column name */
   Name = 'name',
   /** column name */
@@ -536,6 +514,7 @@ export type User = {
   items: Array<Item>;
   /** An aggregated array relationship */
   items_aggregate: Item_Aggregate;
+  photoUrl: Scalars['String'];
   search_engine?: Maybe<Scalars['String']>;
   uid: Scalars['String'];
 };
@@ -603,6 +582,7 @@ export type User_Bool_Exp = {
   email?: Maybe<String_Comparison_Exp>;
   id?: Maybe<String_Comparison_Exp>;
   items?: Maybe<Item_Bool_Exp>;
+  photoUrl?: Maybe<String_Comparison_Exp>;
   search_engine?: Maybe<String_Comparison_Exp>;
   uid?: Maybe<String_Comparison_Exp>;
 };
@@ -624,6 +604,7 @@ export type User_Insert_Input = {
   email?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
   items?: Maybe<Item_Arr_Rel_Insert_Input>;
+  photoUrl?: Maybe<Scalars['String']>;
   search_engine?: Maybe<Scalars['String']>;
   uid?: Maybe<Scalars['String']>;
 };
@@ -633,6 +614,7 @@ export type User_Max_Fields = {
   __typename?: 'user_max_fields';
   email?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
+  photoUrl?: Maybe<Scalars['String']>;
   search_engine?: Maybe<Scalars['String']>;
   uid?: Maybe<Scalars['String']>;
 };
@@ -641,6 +623,7 @@ export type User_Max_Fields = {
 export type User_Max_Order_By = {
   email?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
+  photoUrl?: Maybe<Order_By>;
   search_engine?: Maybe<Order_By>;
   uid?: Maybe<Order_By>;
 };
@@ -650,6 +633,7 @@ export type User_Min_Fields = {
   __typename?: 'user_min_fields';
   email?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
+  photoUrl?: Maybe<Scalars['String']>;
   search_engine?: Maybe<Scalars['String']>;
   uid?: Maybe<Scalars['String']>;
 };
@@ -658,6 +642,7 @@ export type User_Min_Fields = {
 export type User_Min_Order_By = {
   email?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
+  photoUrl?: Maybe<Order_By>;
   search_engine?: Maybe<Order_By>;
   uid?: Maybe<Order_By>;
 };
@@ -689,6 +674,7 @@ export type User_Order_By = {
   email?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   items_aggregate?: Maybe<Item_Aggregate_Order_By>;
+  photoUrl?: Maybe<Order_By>;
   search_engine?: Maybe<Order_By>;
   uid?: Maybe<Order_By>;
 };
@@ -705,6 +691,8 @@ export enum User_Select_Column {
   /** column name */
   Id = 'id',
   /** column name */
+  PhotoUrl = 'photoUrl',
+  /** column name */
   SearchEngine = 'search_engine',
   /** column name */
   Uid = 'uid'
@@ -714,6 +702,7 @@ export enum User_Select_Column {
 export type User_Set_Input = {
   email?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
+  photoUrl?: Maybe<Scalars['String']>;
   search_engine?: Maybe<Scalars['String']>;
   uid?: Maybe<Scalars['String']>;
 };
@@ -724,6 +713,8 @@ export enum User_Update_Column {
   Email = 'email',
   /** column name */
   Id = 'id',
+  /** column name */
+  PhotoUrl = 'photoUrl',
   /** column name */
   SearchEngine = 'search_engine',
   /** column name */
@@ -746,11 +737,10 @@ export type Uuid_Comparison_Exp = {
 
 export type GetUserItemQueryVariables = Exact<{
   user_id: Scalars['String'];
-  is_private?: Maybe<Scalars['Boolean']>;
 }>;
 
 
-export type GetUserItemQuery = { __typename?: 'query_root', item: Array<{ __typename?: 'item', id: any, url: string, name: string, base_url: string, is_private: boolean }> };
+export type GetUserItemQuery = { __typename?: 'query_root', item: Array<{ __typename?: 'item', id: any, url: string, name: string, base_url: string }> };
 
 export type GetAllItemQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -762,7 +752,6 @@ export type InsertItemMutationVariables = Exact<{
   base_url: Scalars['String'];
   name: Scalars['String'];
   user_id: Scalars['String'];
-  is_private: Scalars['Boolean'];
 }>;
 
 
@@ -801,16 +790,12 @@ export type UpdateUserMutation = { __typename?: 'mutation_root', update_user?: M
 
 
 export const GetUserItemDocument = gql`
-    query getUserItem($user_id: String!, $is_private: Boolean) {
-  item(
-    order_by: {name: asc}
-    where: {user_id: {_eq: $user_id}, is_private: {_eq: $is_private}}
-  ) {
+    query getUserItem($user_id: String!) {
+  item(order_by: {name: asc}, where: {user_id: {_eq: $user_id}}) {
     id
     url
     name
     base_url
-    is_private
   }
 }
     `;
@@ -828,7 +813,6 @@ export const GetUserItemDocument = gql`
  * const { data, loading, error } = useGetUserItemQuery({
  *   variables: {
  *      user_id: // value for 'user_id'
- *      is_private: // value for 'is_private'
  *   },
  * });
  */
@@ -843,7 +827,7 @@ export type GetUserItemLazyQueryHookResult = ReturnType<typeof useGetUserItemLaz
 export type GetUserItemQueryResult = Apollo.QueryResult<GetUserItemQuery, GetUserItemQueryVariables>;
 export const GetAllItemDocument = gql`
     query getAllItem {
-  item(limit: 20, order_by: {created_at: desc}, where: {is_private: {_eq: false}}) {
+  item(limit: 20, order_by: {created_at: desc}) {
     base_url
     id
     name
@@ -877,9 +861,9 @@ export type GetAllItemQueryHookResult = ReturnType<typeof useGetAllItemQuery>;
 export type GetAllItemLazyQueryHookResult = ReturnType<typeof useGetAllItemLazyQuery>;
 export type GetAllItemQueryResult = Apollo.QueryResult<GetAllItemQuery, GetAllItemQueryVariables>;
 export const InsertItemDocument = gql`
-    mutation insertItem($url: String!, $base_url: String!, $name: String!, $user_id: String!, $is_private: Boolean!) {
+    mutation insertItem($url: String!, $base_url: String!, $name: String!, $user_id: String!) {
   insert_item_one(
-    object: {url: $url, base_url: $base_url, name: $name, user_id: $user_id, is_private: $is_private}
+    object: {url: $url, base_url: $base_url, name: $name, user_id: $user_id}
   ) {
     id
   }
@@ -904,7 +888,6 @@ export type InsertItemMutationFn = Apollo.MutationFunction<InsertItemMutation, I
  *      base_url: // value for 'base_url'
  *      name: // value for 'name'
  *      user_id: // value for 'user_id'
- *      is_private: // value for 'is_private'
  *   },
  * });
  */

@@ -8,8 +8,6 @@ import {
   DialogContent,
   TextField,
   Grid,
-  FormControlLabel,
-  Switch,
 } from "@material-ui/core";
 import { Bookmark } from "@material-ui/icons";
 
@@ -33,7 +31,7 @@ const BookmarkDialog = ({ onCloseCallBack }: Props) => {
   const onCloseDialog = () => setOpen(false);
 
   const onSubmit = async (data: any) => {
-    const { url, name, is_private } = data;
+    const { url, name } = data;
     if (!id) {
       console.error("user id is null");
       return;
@@ -42,7 +40,7 @@ const BookmarkDialog = ({ onCloseCallBack }: Props) => {
     const base_url = new URL(url).origin;
 
     insertItem({
-      variables: { url, base_url, name, user_id: id, is_private },
+      variables: { url, base_url, name, user_id: id },
     }).then(() => {
       onCloseDialog();
       onCloseCallBack();
@@ -95,20 +93,6 @@ const BookmarkDialog = ({ onCloseCallBack }: Props) => {
                       },
                     }),
                   }}
-                />
-              </Grid>
-              <Grid item>
-                <FormControlLabel
-                  label="비공개"
-                  labelPlacement="start"
-                  control={
-                    <Switch
-                      defaultChecked={false}
-                      name="is_private"
-                      color="primary"
-                      inputRef={register()}
-                    />
-                  }
                 />
               </Grid>
             </Grid>

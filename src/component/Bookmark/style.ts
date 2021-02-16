@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 import { Avatar, ButtonBase, CircularProgress, Paper } from "@material-ui/core";
-import { CloseRounded, LockRounded } from "@material-ui/icons";
+import { CloseRounded } from "@material-ui/icons";
 import colorSet from "../../styles/colorSet";
 
 export const MuiAvatar = styled(Avatar)`
@@ -31,17 +31,6 @@ export const MuiClose = styled(CloseRounded)`
   &:hover {
     color: ${colorSet.gray900};
   }
-`;
-
-export const MuiPrivate = styled(LockRounded)`
-  ${iconButtonPosition}
-  top: -8px;
-  right: -8px;
-
-  padding: 2px;
-  width: 16px;
-  height: 16px;
-  color: ${colorSet.gray900};
 `;
 
 export const FaviconContainer = styled.div`

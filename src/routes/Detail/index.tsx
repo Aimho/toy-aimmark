@@ -22,7 +22,7 @@ function Detail() {
   const isOwner = id === m_userState.id ? true : false;
 
   const { data, error, refetch } = useGetUserItemQuery({
-    variables: { user_id: id, is_private: !isOwner ? false : null },
+    variables: { user_id: id },
   });
 
   useEffect(() => {
