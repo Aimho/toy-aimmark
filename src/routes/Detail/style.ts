@@ -1,5 +1,6 @@
-import styled from "styled-components";
-import { IconButton, TextField } from "@material-ui/core";
+import styled, { css } from "styled-components";
+import { CloseRounded } from "@material-ui/icons";
+import { IconButton, TextField, CircularProgress } from "@material-ui/core";
 
 export const SearchInput = styled(TextField)`
   padding-left: 16px;
@@ -11,7 +12,7 @@ export const SearchInput = styled(TextField)`
   &:focus,
   &:active,
   &:hover {
-    background: #e5e5f0;
+    background: radial-gradient(#f5f5fa, #e5e5f0);
   }
   input {
     color: #7878ab;
@@ -28,4 +29,23 @@ export const SearchIcon = styled(IconButton)`
   &:hover {
     background: #e5e5f0;
   }
+`;
+
+const iconButtonPosition = css`
+  top: 8px;
+  right: 20px;
+  position: absolute;
+`;
+
+export const MuiCircleProgress = styled(CircularProgress)`
+  ${iconButtonPosition}
+  color: #7878AB;
+`;
+
+export const MuiClose = styled(CloseRounded)`
+  ${iconButtonPosition}
+
+  width: 16px;
+  height: 16px;
+  color: #7878ab;
 `;

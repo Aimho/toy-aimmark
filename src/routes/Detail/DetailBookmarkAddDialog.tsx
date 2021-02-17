@@ -8,21 +8,20 @@ import {
   DialogContent,
   TextField,
   Grid,
-  FormControlLabel,
-  Switch,
 } from "@material-ui/core";
-import { Bookmark } from "@material-ui/icons";
+import { Add } from "@material-ui/icons";
 
 import { useRecoilValue } from "recoil";
-import { userState } from "../../recoils/userState";
+import { userProfile } from "../../recoils/userState";
 import { useInsertItemMutation } from "../../generated/graphql";
+import { MuiIconButton } from "../../styles/customStyles";
 
 interface Props {
   onCloseCallBack: () => void;
 }
 
-const BookmarkDialog = ({ onCloseCallBack }: Props) => {
-  const { id } = useRecoilValue(userState);
+const DetailBookmarkAddDialog = ({ onCloseCallBack }: Props) => {
+  const { id } = useRecoilValue(userProfile);
   const [insertItem] = useInsertItemMutation();
 
   const { register, handleSubmit, errors } = useForm();
@@ -51,14 +50,9 @@ const BookmarkDialog = ({ onCloseCallBack }: Props) => {
 
   return (
     <React.Fragment>
-      <Button
-        variant="text"
-        color="primary"
-        startIcon={<Bookmark />}
-        onClick={onOpenDialog}
-      >
-        북마크 등록
-      </Button>
+      <MuiIconButton onClick={onOpenDialog} style={{ marginTop: 24 }}>
+        <Add />
+      </MuiIconButton>
 
       <Dialog open={open} maxWidth="xs" fullWidth>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -84,6 +78,7 @@ const BookmarkDialog = ({ onCloseCallBack }: Props) => {
                   name="url"
                   label="URL"
                   error={url ? true : false}
+                  placeholder="https://~~~"
                   helperText={url?.message}
                   inputProps={{
                     ref: register({
@@ -91,30 +86,16 @@ const BookmarkDialog = ({ onCloseCallBack }: Props) => {
                       pattern: {
                         // eslint-disable-next-line
                         value: /^http[s]?\:\/\//i,
-                        message: "올바른 url을 입력해주세요",
+                        message: "https를 포함한 url을 입력해주세요",
                       },
                     }),
                   }}
                 />
               </Grid>
-              <Grid item>
-                <FormControlLabel
-                  label="비공개"
-                  labelPlacement="start"
-                  control={
-                    <Switch
-                      defaultChecked={false}
-                      name="is_private"
-                      color="primary"
-                      inputRef={register()}
-                    />
-                  }
-                />
-              </Grid>
             </Grid>
           </DialogContent>
           <DialogActions>
-            <Button variant="text" onClick={onCloseDialog}>
+            <Button variant="text" color="secondary" onClick={onCloseDialog}>
               취소
             </Button>
             <Button variant="text" color="primary" type="submit">
@@ -127,4 +108,4 @@ const BookmarkDialog = ({ onCloseCallBack }: Props) => {
   );
 };
 
-export default BookmarkDialog;
+export default DetailBookmarkAddDialog;

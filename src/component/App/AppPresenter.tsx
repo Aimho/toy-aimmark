@@ -9,7 +9,7 @@ const AppPresenter = () => (
   <BrowserRouter>
     <Switch>
       <Route path="/" exact={true} component={Home} />
-      <Route path="/:userId" exact={true} component={Detail} />
+      <Route path="/:ownerId" exact={true} component={Detail} />
       <Route path="*" component={NotFound} />
     </Switch>
   </BrowserRouter>

@@ -13,8 +13,7 @@ import {
 } from "../../generated/graphql";
 
 import { onSignInGoogle } from "../../utils";
-import { TSearchEngine } from "../../component/SearchBar/type";
-import { IBookmarkInput } from "../../component/Bookmark/type";
+import { TSearchEngine, IBookmarkInput } from "../Detail/type";
 import HomePresenter from "./HomePresenter";
 
 function Home() {
@@ -37,7 +36,7 @@ function Home() {
     const { id, email, photoUrl, search_engine = "google" } = userByPk;
     setProfile({ id, email, photoUrl });
     setSearchEngine(search_engine as TSearchEngine);
-    history.push(`/${id}`);
+    history.replace(`/${id}`);
   }, [history, userByPk, setProfile, setSearchEngine]);
 
   const onSignIn = async () => {
@@ -90,7 +89,7 @@ function Home() {
           user_id: id,
         },
       });
-      history.push(`/${id}`);
+      history.replace(`/${id}`);
     } catch (error) {
       console.error(error);
     }

@@ -7,7 +7,7 @@ import firebase from "firebase/app";
 import { useGetUserLazyQuery } from "../../generated/graphql";
 import { userProfile, userSearchEngine } from "../../recoils/userState";
 import { initRender } from "../../recoils/renderState";
-import { TSearchEngine } from "../SearchBar/type";
+import { TSearchEngine } from "../../routes/Detail/type";
 import AppPresenter from "./AppPresenter";
 import LoadingLine from "../LoadingLine";
 

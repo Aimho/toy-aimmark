@@ -1,7 +1,7 @@
 const colorSet = {
   primaryLight: "#F5F5FA",
-  primaryBase: "#7878AB",
-  primaryDark: "#E5E5F0",
+  primaryBase: "#E5E5F0",
+  primaryDark: "#C7C7DC",
   errorLight: "#fce7e7",
   errorBase: "#e53935",
   errorDark: "#c62828",

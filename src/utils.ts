@@ -1,10 +1,10 @@
 import "firebase/auth";
 import firebase from "firebase/app";
 
-import { TSearchEngine } from "./component/SearchBar/type";
+import { TSearchEngine } from "./routes/Detail/type";
 
 export const faviconImgProps = (baseUrl: string) => ({
-  src: `https://www.google.com/s2/favicons?sz=64&domain_url=${baseUrl}`,
+  src: `https://www.google.com/s2/favicons?sz=32&domain_url=${baseUrl}`,
   onError: (e: any) => {
     if (e.target.src.indexOf("favicon.ico") === -1) {
       return (e.target.src = `${baseUrl}/favicon.ico`);
@@ -67,5 +67,16 @@ export const onSignInGoogle = async () => {
   } catch (error) {
     console.error(error);
     return undefined;
+  }
+};
+
+export const transferSearchEngine = (searchEngine: TSearchEngine) => {
+  switch (searchEngine) {
+    case "google":
+      return "구글";
+    case "naver":
+      return "네이버";
+    case "youtube":
+      return "유투브";
   }
 };

@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { useRecoilValue } from "recoil";
 
-import { Button, Grid, InputAdornment, Container } from "@material-ui/core";
 import { SearchRounded } from "@material-ui/icons";
+import { Grid, InputAdornment, Container } from "@material-ui/core";
 
 import { getSearchUrl, openUrl } from "../../utils";
 import { userSearchEngine } from "../../recoils/userState";
-import { SearchInput, SearchIcon } from "./style";
+import { MuiIconButton } from "../../styles/customStyles";
+import { SearchInput } from "./style";
+import DetailSearchEngine from "./DetailSearchEngine";
 
 const DetailSearchBar = () => {
   const [searchText, setSearchText] = useState("");
@@ -23,29 +25,38 @@ const DetailSearchBar = () => {
 
   const endAdornment = (
     <InputAdornment position="end">
-      <SearchIcon size="small" onClick={onSearch}>
+      <MuiIconButton size="small" onClick={onSearch}>
         <SearchRounded />
-      </SearchIcon>
+      </MuiIconButton>
     </InputAdornment>
   );
 
   return (
-    <Container component="section" style={{ margin: "32px auto" }}>
-      <Grid container justify="space-between" alignItems="center">
+    <Container
+      maxWidth="md"
+      component="section"
+      style={{ margin: "32px auto" }}
+    >
+      <Grid
+        container
+        spacing={2}
+        wrap="nowrap"
+        alignItems="center"
+        justify="space-between"
+      >
         <Grid item>
-          <Button>Naver</Button>
+          <DetailSearchEngine />
         </Grid>
-        <Grid item xs={8} sm={10}>
-          <SearchInput
-            fullWidth
-            onKeyUp={onKeyUp}
-            variant="outlined"
-            placeholder="Search + Enter :)"
-            value={searchText}
-            onChange={(e) => setSearchText(e.target.value)}
-            InputProps={{ endAdornment }}
-          />
-        </Grid>
+        <SearchInput
+          fullWidth
+          size="small"
+          onKeyUp={onKeyUp}
+          variant="outlined"
+          placeholder="Search + Enter :)"
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
+          InputProps={{ endAdornment }}
+        />
       </Grid>
     </Container>
   );

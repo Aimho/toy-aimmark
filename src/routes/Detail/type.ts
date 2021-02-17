@@ -1,5 +1,7 @@
 import { Maybe } from "../../generated/graphql";
 
+export type TSearchEngine = "google" | "naver" | "youtube";
+
 export type TBookmarkItem = Array<{
   __typename?: "item";
   id: any;

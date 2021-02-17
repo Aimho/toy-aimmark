@@ -2,17 +2,17 @@ import React from "react";
 import { useSnackbar } from "notistack";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
-import { Avatar, Button, Container, Grid } from "@material-ui/core";
-import { FileCopy } from "@material-ui/icons";
 import { Skeleton } from "@material-ui/lab";
+import { FileCopy } from "@material-ui/icons";
+import { Avatar, Button, Container, Grid } from "@material-ui/core";
 
 import { useGetUserPhotoUrlQuery } from "../../generated/graphql";
 
 interface Props {
-  userId: string;
+  ownerId: string;
 }
 
-const DetailHeader = ({ userId }: Props) => {
+const DetailHeader = ({ ownerId }: Props) => {
   const { enqueueSnackbar } = useSnackbar();
 
   const { href } = window.location;
@@ -23,7 +23,7 @@ const DetailHeader = ({ userId }: Props) => {
   };
 
   const { data } = useGetUserPhotoUrlQuery({
-    variables: { id: userId },
+    variables: { id: ownerId },
   });
 
   const Profile = () => {
@@ -37,14 +37,18 @@ const DetailHeader = ({ userId }: Props) => {
   };
 
   return (
-    <Container component="header" style={{ margin: "12px auto" }}>
+    <Container component="header" maxWidth="md" style={{ margin: "12px auto" }}>
       <Grid container justify="space-between">
         <Grid item>
           <Profile />
         </Grid>
         <Grid item>
           <CopyToClipboard text={href} onCopy={onCopy}>
-            <Button variant="text" startIcon={<FileCopy />}>
+            <Button
+              variant="text"
+              startIcon={<FileCopy />}
+              style={{ fontWeight: "bolder" }}
+            >
               북마크 공유
             </Button>
           </CopyToClipboard>

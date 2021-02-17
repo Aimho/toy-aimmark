@@ -8,7 +8,7 @@ import {
 } from "@material-ui/core";
 import { Add } from "@material-ui/icons";
 
-import { IBookmarkInput } from "../../component/Bookmark/type";
+import { IBookmarkInput } from "../Detail/type";
 import { CardButton } from "../../styles/customStyles";
 import { Title } from "./style";
 
