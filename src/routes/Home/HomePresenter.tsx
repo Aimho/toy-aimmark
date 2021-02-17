@@ -61,9 +61,9 @@ function HomePresenter({ isIn, onSignIn, onStart }: Props) {
                   <p>{item.name}</p>
 
                   {selected === index ? (
-                    <CircularProgress size={75} color="primary" />
+                    <CircularProgress size={75} color="inherit" />
                   ) : (
-                    <Add color="primary" fontSize="inherit" />
+                    <Add color="inherit" fontSize="inherit" />
                   )}
                 </CardButton>
               </Grid>
