@@ -1,7 +1,10 @@
-import { TSearchEngine } from "./component/SearchBar/type";
+import "firebase/auth";
+import firebase from "firebase/app";
+
+import { TSearchEngine } from "./routes/Detail/type";
 
 export const faviconImgProps = (baseUrl: string) => ({
-  src: `https://www.google.com/s2/favicons?sz=64&domain_url=${baseUrl}`,
+  src: `https://www.google.com/s2/favicons?sz=32&domain_url=${baseUrl}`,
   onError: (e: any) => {
     if (e.target.src.indexOf("favicon.ico") === -1) {
       return (e.target.src = `${baseUrl}/favicon.ico`);
@@ -37,5 +40,43 @@ export const getSearchUrl = (search_engine: TSearchEngine) => {
     // youtube
     default:
       return "https://www.youtube.com/results?search_query=";
+  }
+};
+
+export const onSignInGoogle = async () => {
+  // provider is google
+  const provider = new firebase.auth.GoogleAuthProvider();
+
+  try {
+    const firebaseAuth = await firebase.auth().signInWithPopup(provider);
+    if (!firebaseAuth.additionalUserInfo) {
+      // eslint-disable-next-line
+      throw "firebase additionalUserInfo is null";
+    }
+
+    // firebase data extract
+    const { profile, isNewUser } = firebaseAuth.additionalUserInfo;
+    const { uid } = firebaseAuth.user!;
+    const { id, email, picture } = profile as any;
+
+    return {
+      uid,
+      profile: { id, email, photoUrl: picture },
+      isNewUser,
+    };
+  } catch (error) {
+    console.error(error);
+    return undefined;
+  }
+};
+
+export const transferSearchEngine = (searchEngine: TSearchEngine) => {
+  switch (searchEngine) {
+    case "google":
+      return "구글";
+    case "naver":
+      return "네이버";
+    case "youtube":
+      return "유투브";
   }
 };

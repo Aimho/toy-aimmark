@@ -1,30 +1,16 @@
-import { atom, selector } from "recoil";
-import { TSearchEngine } from "../component/SearchBar/type";
-
-export const userId = atom({
-  key: "userId",
-  default: "",
-});
-
-export const userEmail = atom({
-  key: "userEmail",
-  default: "",
-});
+import { atom } from "recoil";
+import { TSearchEngine } from "../routes/Detail/type";
 
 export const userSearchEngine = atom({
   key: "userSearchEngine",
   default: "google" as TSearchEngine,
 });
 
-export const userState = selector({
-  key: "userState",
-  get: ({ get }) => {
-    const id = get(userId);
-    const email = get(userEmail);
-
-    return {
-      id,
-      email,
-    };
+export const userProfile = atom({
+  key: "userProfile",
+  default: {
+    id: "",
+    email: "",
+    photoUrl: "",
   },
 });

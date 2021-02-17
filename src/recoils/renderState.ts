@@ -1,17 +1,6 @@
-import { atom, selector } from "recoil";
+import { atom } from "recoil";
 
-export const renderAuthCheck = atom({
-  key: "renderAuthCheck",
+export const initRender = atom({
+  key: "render/init",
   default: false,
-});
-
-export const renderState = selector({
-  key: "renderState",
-  get: ({ get }) => {
-    const isAuthCheck = get(renderAuthCheck);
-
-    return {
-      isAuthCheck,
-    };
-  },
 });

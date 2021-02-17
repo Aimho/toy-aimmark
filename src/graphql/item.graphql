@@ -7,15 +7,6 @@ query getUserItem($user_id: String!) {
   }
 }
 
-query getAllItem {
-  item(limit: 20, order_by: { created_at: desc }) {
-    base_url
-    id
-    name
-    url
-  }
-}
-
 mutation insertItem(
   $url: String!
   $base_url: String!

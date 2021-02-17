@@ -1,8 +1,17 @@
-mutation insertUser($id: String!, $uid: String!, $email: String!) {
-  insert_user_one(object: { id: $id, uid: $uid, email: $email }) {
+mutation insertUser(
+  $id: String!
+  $uid: String!
+  $email: String!
+  $photoUrl: String!
+) {
+  insert_user_one(
+    object: { id: $id, uid: $uid, email: $email, photoUrl: $photoUrl }
+  ) {
     id
     uid
     email
+    photoUrl
+    search_engine
   }
 }
 
@@ -11,6 +20,7 @@ query getUser($uid: String!) {
     id
     uid
     email
+    photoUrl
     search_engine
   }
 }
@@ -23,5 +33,11 @@ mutation updateUser($id: String!, $search_engine: String!) {
     returning {
       search_engine
     }
+  }
+}
+
+query getUserPhotoUrl($id: String!) {
+  user(where: { id: { _eq: $id } }) {
+    photoUrl
   }
 }
