@@ -35,7 +35,7 @@ const DetailSearchBar = () => {
     <Container
       maxWidth="md"
       component="section"
-      style={{ margin: "32px auto" }}
+      style={{ margin: "48px auto" }}
     >
       <Grid
         container

@@ -3,7 +3,13 @@ import { useRecoilValue } from "recoil";
 import { useSnackbar } from "notistack";
 
 import { Skeleton } from "@material-ui/lab";
-import { Container, Typography, Grid } from "@material-ui/core";
+import {
+  Container,
+  Typography,
+  Grid,
+  useTheme,
+  useMediaQuery,
+} from "@material-ui/core";
 
 import {
   useDeleteItemMutation,
@@ -21,6 +27,9 @@ interface Props {
 }
 
 const DetailBookmark = ({ ownerId }: Props) => {
+  const theme = useTheme();
+  const matchesMobile = useMediaQuery(theme.breakpoints.down("xs"));
+
   const { enqueueSnackbar } = useSnackbar();
   const { data, error, refetch } = useGetUserItemQuery({
     variables: { user_id: ownerId },
@@ -123,7 +132,7 @@ const DetailBookmark = ({ ownerId }: Props) => {
             const grow = Math.floor(item.name.length / 10) + 1;
             return {
               flexGrow: grow,
-              maxWidth: "345px",
+              maxWidth: matchesMobile ? "auto" : "345px",
             };
           };
 

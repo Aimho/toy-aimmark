@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
 import {
@@ -27,11 +27,13 @@ const DetailBookmarkAddDialog = ({ onCloseCallBack }: Props) => {
   const { register, handleSubmit, errors } = useForm();
   const { url, name } = errors;
 
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const onOpenDialog = () => setOpen(true);
   const onCloseDialog = () => setOpen(false);
+  const [disabled, setDisabled] = useState(false);
 
   const onSubmit = async (data: any) => {
+    setDisabled(true);
     const { url, name } = data;
     if (!id) {
       console.error("user id is null");
@@ -45,6 +47,7 @@ const DetailBookmarkAddDialog = ({ onCloseCallBack }: Props) => {
     }).then(() => {
       onCloseDialog();
       onCloseCallBack();
+      setDisabled(false);
     });
   };
 
@@ -95,10 +98,20 @@ const DetailBookmarkAddDialog = ({ onCloseCallBack }: Props) => {
             </Grid>
           </DialogContent>
           <DialogActions>
-            <Button variant="text" color="secondary" onClick={onCloseDialog}>
+            <Button
+              variant="text"
+              color="secondary"
+              onClick={onCloseDialog}
+              disabled={disabled}
+            >
               취소
             </Button>
-            <Button variant="text" color="primary" type="submit">
+            <Button
+              variant="text"
+              color="primary"
+              type="submit"
+              disabled={disabled}
+            >
               추가
             </Button>
           </DialogActions>

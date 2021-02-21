@@ -55,6 +55,13 @@ export const CardButton = styled(ButtonBase)`
   font-weight: bold;
   text-align: center;
   flex-direction: column;
+  ${({ theme }) => `
+    ${theme.breakpoints.down("xs")} {
+      width: 100%;
+      font-size: 24px;
+      padding: 16px 12px;
+    }
+  `}
   p {
     margin-bottom: 24px;
   }
@@ -68,6 +75,11 @@ export const BookmarkButton = styled(CardButton)`
   position: relative;
   align-items: center;
   margin-bottom: 8px;
+  ${({ theme }) => `
+    ${theme.breakpoints.down("xs")} {
+      font-size: 12px;
+    }
+  `}
 
   img {
     opacity: 0.1;

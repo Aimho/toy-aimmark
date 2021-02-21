@@ -15,7 +15,7 @@ import { Title } from "./style";
 interface Props {
   isIn: boolean;
   onSignIn: () => void;
-  onStart: (item: IBookmarkInput) => void;
+  onStart: (item: IBookmarkInput) => Promise<{ error: boolean }>;
 }
 
 function HomePresenter({ isIn, onSignIn, onStart }: Props) {
@@ -29,9 +29,10 @@ function HomePresenter({ isIn, onSignIn, onStart }: Props) {
     if (selected === -1) return false;
     return selected !== index ? true : false;
   };
-  const onClickItem = (item: IBookmarkInput, index: number) => {
-    onStart(item);
+  const onClickItem = async (item: IBookmarkInput, index: number) => {
     setSelected(index);
+    const { error } = await onStart(item);
+    if (error) setSelected(-1);
   };
 
   return (
@@ -40,7 +41,11 @@ function HomePresenter({ isIn, onSignIn, onStart }: Props) {
         <Container component="header" style={{ margin: "12px auto" }}>
           <Grid container justify="flex-end">
             <Grid item>
-              <Button variant="text" onClick={onSignIn}>
+              <Button
+                variant="text"
+                onClick={onSignIn}
+                style={{ fontWeight: "bold" }}
+              >
                 <p>이미 북마크가 있다면?</p>
               </Button>
             </Grid>

@@ -64,11 +64,14 @@ function Home() {
 
         setProfile({ id, email, photoUrl });
         setSearchEngine(search_engine as TSearchEngine);
+        return id;
       } else {
         getUser({ variables: { uid } });
+        return "";
       }
     } catch (error) {
       console.error(error);
+      return "";
     }
   };
 
@@ -80,18 +83,24 @@ function Home() {
     const base_url = new URL(item.url).origin;
 
     try {
-      await onSignIn();
+      let userId = id;
+      if (!userId) {
+        userId = await onSignIn();
+      }
+
+      if (!userId) return { error: true };
       await insertItem({
         variables: {
           url: item.url,
           name: item.name,
           base_url,
-          user_id: id,
+          user_id: userId,
         },
       });
-      history.replace(`/${id}`);
+      history.replace(`/${userId}`);
+      return { error: false };
     } catch (error) {
-      console.error(error);
+      return { error: true };
     }
   };
 
