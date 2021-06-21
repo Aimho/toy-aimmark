@@ -1,6 +1,6 @@
 브라우저 홈 화면으로 사용할 북마크 저장 및 공유 기능을 가진 토이 프로젝트입니다.
-- <a href="https://toy-bookmark.web.app/" target="_blank">AimMark</a>
-- <a href="https://toy-bookmark.web.app/108721781525831972976" target="_blank">작성자 페이지</a>
+- <a target="_blank" href="https://toy-bookmark.web.app/">AimMark</a>
+- <a target="_blank" href="https://toy-bookmark.web.app/108721781525831972976">작성자 페이지</a>
 
 # 사용 방법
 
